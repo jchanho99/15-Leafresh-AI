@@ -7,15 +7,16 @@ import os
 from google.cloud import storage  
 import tempfile                     # 임시 파일 저장용
 
+
 class ImageVerifyModel :
-    def __init__(self, credential_env="GOOGLE_APPLICATION_CREDENTIALS", project_id="keen-scion-457104-n8", region="us-central1"): 
+    def __init__(self, credential_env="GOOGLE_APPLICATION_CREDENTIALS", project_id="leafresh", region="us-central1"): 
         # 환경변수 로드 및 인증 초기화
         load_dotenv()
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv(credential_env)
         init(project=project_id, location=region)                                       # Vertex AI 프로젝트/리전 초기화
-        self.model = GenerativeModel("gemini-1.5-pro")                                  # 모델 정의
+        self.model = GenerativeModel("gemini-2.0-flash")                                # 모델 정의
         self.storage_client = storage.Client()                                          # GCS 클라이언트 
- 
+
 
     def image_verify(self, bucket_name: str, blob_name: str, challenge_type: str = "텀블러 챌린지") -> str :
         try:

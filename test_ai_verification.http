@@ -7,5 +7,6 @@ Content-Type: application/json
   "memberId": 42,
   "challengeId": 101,
   "date": "2025-05-01",
-  "challengeName": "비건 챌린지"
+  "challengeName": "텀블러 챌린지"
 }
+
