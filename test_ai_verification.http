@@ -1,0 +1,11 @@
+### 챌린지 이미지 인증 요청 테스트 (FastAPI)
+POST http://localhost:8000/ai/image/Verification
+Content-Type: application/json
+
+{
+  "imageUrl": "https://storage.cloud.google.com/leafresh-images/example2.webp",
+  "memberId": 42,
+  "challengeId": 101,
+  "date": "2025-05-01",
+  "challengeName": "비건 챌린지"
+}
