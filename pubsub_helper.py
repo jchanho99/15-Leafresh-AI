@@ -12,7 +12,7 @@ topic_id = os.getenv("PUBSUB_TOPIC")
 publisher = pubsub_v1.PublisherClient()
 topic_path = publisher.topic_path(project_id, topic_id)
 
-def publish_message(data: dict):
+def add_task(data: dict):
     message_json = json.dumps(data)
     future = publisher.publish(topic_path, message_json.encode("utf-8"))
 

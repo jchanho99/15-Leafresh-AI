@@ -3,13 +3,11 @@ from dotenv import load_dotenv
 
 from LLM_verify_model import ImageVerifyModel
 
-from fastapi import FastAPI, status
+from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
-from datetime import date
-from urllib.parse import urlparse
 
-from pubsub_helper import publish_message
+from pubsub_helper import add_task
 
 # 환경 변수 불러오기
 load_dotenv()
@@ -39,7 +37,7 @@ async def verify_image(req: ImageVerificationRequest):
     try: 
         data = req.dict()
         data["date"] = str(req.date)        # 명시적 문자열으로 변경 
-        publish_message(data)
+        add_task(data)
         
         # 추후 변경 필요
         return {

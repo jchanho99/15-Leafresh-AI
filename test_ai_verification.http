@@ -3,10 +3,10 @@ POST http://localhost:8000/ai/image/Verification
 Content-Type: application/json
 
 {
-  "imageUrl": "https://storage.cloud.google.com/leafresh-images/example2.webp",
-  "memberId": 42,
-  "challengeId": 101,
-  "date": "2025-05-01",
-  "challengeName": "텀블러 챌린지"
+  "imageUrl": "https://storage.cloud.google.com/leafresh-images/example2.png",
+  "memberId": 101,
+  "challengeId": 123,
+  "date": "2025-05-02",
+  "challengeName": "제로웨이스트 챌린지"
 }
 
