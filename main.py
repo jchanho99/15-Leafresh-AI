@@ -23,6 +23,8 @@ verifier = ImageVerifyModel()
 
 # 요청 데이터 모델
 class ImageVerificationRequest(BaseModel):
+    verificationId: int
+    type: str
     imageUrl: str           
     memberId: int
     challengeId: int
@@ -56,15 +58,16 @@ async def verify_image(req: ImageVerificationRequest):
         }
 
 class CallbackResult(BaseModel):
+    type: str
     memberId: int
     challengeId: int
     date: str
     result: str
 
-@app.post("/api/challenges/{challengeId}/image/verification/result")
-async def receive_result(challengeId: int, data: CallbackResult):
+@app.post("/api/verifications/{verificationId}/result")
+async def receive_result(verificationId: int, data: CallbackResult):
     print(f"콜백 수신 완료: {data}")
-    return {"status": "received", "challengeId": challengeId}
+    return {"status": "received", "verificationId": verificationId}
 
 # worker를 main 실행할 때 지속적으로 실행되도록 변경 
 # pubsub_v1이 동기로 실행되므로 async를 붙이지 않음 
