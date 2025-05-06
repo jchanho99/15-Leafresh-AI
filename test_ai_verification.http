@@ -1,15 +1,15 @@
 ### 챌린지 이미지 인증 요청 테스트 (FastAPI)
-POST http://localhost:8000/ai/image/Verification
+POST http://localhost:8000/ai/image/verification
 Content-Type: application/json
 
 {
   "verificationId": 1,
   "type": "PERSONAL",
   "imageUrl": "https://storage.cloud.google.com/leafresh-images/example2.png",
-  "memberId": 222,
-  "challengeId": 3000,
+  "memberId": 111,
+  "challengeId": 1000,
   "date": "2025-05-02",
-  "challengeName": "비건 식단 챌린지"
+  "challengeName": "텀블러 챌린지"
 }
 
 # gs://leafresh-images/example2.png
