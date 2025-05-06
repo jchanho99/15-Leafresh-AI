@@ -4,9 +4,12 @@ Content-Type: application/json
 
 {
   "imageUrl": "https://storage.cloud.google.com/leafresh-images/example2.png",
-  "memberId": 101,
-  "challengeId": 123,
+  "memberId": 100,
+  "challengeId": 9000,
   "date": "2025-05-02",
-  "challengeName": "제로웨이스트 챌린지"
+  "challengeName": "비건 식단 챌린지"
 }
+
+# gs://leafresh-images/example2.png
+
 

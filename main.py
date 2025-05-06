@@ -9,6 +9,9 @@ from typing import Optional
 
 from pubsub_helper import add_task
 
+import threading
+from worker import run_worker
+
 # 환경 변수 불러오기
 load_dotenv()
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
@@ -63,4 +66,9 @@ async def receive_result(challengeId: int, data: CallbackResult):
     print(f"콜백 수신 완료: {data}")
     return {"status": "received", "challengeId": challengeId}
 
+# worker를 main 실행할 때 지속적으로 실행되도록 변경 
+# pubsub_v1이 동기로 실행되므로 async를 붙이지 않음 
+@app.on_event("startup")
+def startup_event():
+    threading.Thread(target=run_worker, daemon=True).start()         # FastAPI 서버 실행과 동시에 Pub/Sub 워커를 다른 작업 흐름에서 병렬로 처리하기 위해서 스레딩 사용 
 
