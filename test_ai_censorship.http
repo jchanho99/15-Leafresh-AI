@@ -1,0 +1,25 @@
+### 챌린지 이미지 인증 요청 테스트 (FastAPI)
+POST http://localhost:8000/ai/challenges/group/validation
+Content-Type: application/json
+
+{
+  "memberId": 12345,
+  "challengeName": "텀블러 챌린지",
+  "startDate": "2025-04-20",
+  "endDate": "2025-04-27",
+  "challenge": [
+    {
+      "id": 200,
+      "name": "플로깅",
+      "startDate": "2025-01-01",
+      "endDate": "2025-06-30"
+    },
+    {
+      "id": 201,
+      "name": "비건 식단",
+      "startDate": "2025-01-01",
+      "endDate": "2025-06-30"
+    }
+  ]
+}
+
