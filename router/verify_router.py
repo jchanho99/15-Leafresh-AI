@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import Optional
 
@@ -31,18 +32,24 @@ async def verify_image(req: ImageVerificationRequest):
         data["date"] = str(req.date)
         add_task(data)
 
-        return {
-            "status": 202,
-            "message": "이미지 인증 요청이 정상적으로 접수되었습니다. 결과는 추후 콜백으로 전송됩니다.",
-            "data": None
-        }
+        return JSONResponse(
+            status_code=202,
+            content={
+                "status": 202,
+                "message": "이미지 인증 요청이 정상적으로 접수되었습니다. 결과는 추후 콜백으로 전송됩니다.",
+                "data": None
+            }
+        )
+    
     except Exception as e:
-        return {
-            "status": 500,
-            "message": f"이미지 인증 중 오류 발생: {e}",
-            "data": None
-        }
-
+        return JSONResponse(
+            status_code=500,
+            content={
+                "status": 500,
+                "message": f"이미지 인증 중 오류 발생: {e}",
+                "data": None
+            }
+        )
 
 class CallbackResult(BaseModel):
     type: str
@@ -54,4 +61,10 @@ class CallbackResult(BaseModel):
 @router.post("/api/verifications/{verificationId}/result")
 async def receive_result(verificationId: int, data: CallbackResult):
     print(f"콜백 수신 완료: {data}")
-    return {"status": "received", "verificationId": verificationId}
+    return JSONResponse(
+        status_code=200,
+        content={
+            "status": "received",
+            "verificationId": verificationId
+        }
+    )

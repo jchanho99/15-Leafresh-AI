@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
 from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional
 
 from model.censorship.LLM_censorship_model import CensorshipModel
@@ -24,7 +23,7 @@ class ValidationRequest(BaseModel):
     challengeName: Optional[str] = None
     startDate: Optional[str] = None
     endDate: Optional[str] = None
-    challenge: Optional[List[ChallengeInfo]] = []
+    challenge: List[ChallengeInfo] = Field(default_factory=list)
 
 # 응답 데이터 모델
 class ValidationResponse(BaseModel):
@@ -52,11 +51,30 @@ async def validate_challenge(req: ValidationRequest):
             "status": 400, "message": "끝 날짜는 필수 항목입니다.", "data": None
         })
 
-    is_creatable, msg = model.validate(req.challengeName, req.startDate, req.endDate, req.challenge)
-    return ValidationResponse(
-        status=200,
-        message=msg,
-        data={"result": is_creatable}
+    if req.challenge is None or len(req.challenge) == 0:
+        return JSONResponse(
+            status_code=200,
+            content={
+                "status": 200,
+                "message": "챌린지 목록이 없으므로 생성 가능합니다.",
+                "data": {
+                    "result": True
+                }
+            }
+        )
+
+    is_creatable, msg = model.validate(
+        req.challengeName, req.startDate, req.endDate, req.challenge
+    )
+    return JSONResponse(
+        status_code=200,
+        content={
+            "status": 200,
+            "message": msg,
+            "data": {
+                "result": is_creatable
+            }
+        }
     )
 
 # 422 예외 처리
@@ -88,4 +106,3 @@ async def http_exception_handler(request: Request, exc: HTTPException):
             "data": None
         }
     )
-
