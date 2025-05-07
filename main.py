@@ -12,6 +12,8 @@ from router.verify_router import router as verify_router
 from router.censorship_router import router as censorship_router
 from router.censorship_router import validation_exception_handler, http_exception_handler
 
+from router.chatbot_router import router as chatbot_router
+
 load_dotenv()
 
 # app 초기화
@@ -20,6 +22,8 @@ app = FastAPI()
 # router 등록
 app.include_router(verify_router)
 app.include_router(censorship_router)
+app.include_router(chatbot_router)
+
 
 # worker를 main 실행할 때 지속적으로 실행되도록 변경 
 # pubsub_v1이 동기로 실행되므로 async를 붙이지 않음 
