@@ -2,8 +2,8 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional
 
-from LLM_verify_model import ImageVerifyModel
-from pubsub_helper import add_task
+from model.verify.LLM_verify_model import ImageVerifyModel
+from model.verify.pubsub_helper import add_task
 
 router = APIRouter()
 verifier = ImageVerifyModel()
