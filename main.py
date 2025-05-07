@@ -12,6 +12,7 @@ from router.verify_router import router as verify_router
 from router.censorship_router import router as censorship_router
 from router.censorship_router import validation_exception_handler, http_exception_handler
 
+
 from router.chatbot_router import router as chatbot_router
 
 load_dotenv()

@@ -1,4 +1,4 @@
-# chatbot_llm_model_vertex.py
+# LLM_chatbot_base_info_model.py
 # /ai/chatbot/recommendation/base-info 에서 받아와 답변 호출
 from google.cloud import aiplatform
 from vertexai.preview.generative_models import GenerativeModel
