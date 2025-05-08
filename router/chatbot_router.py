@@ -21,12 +21,10 @@ BAD_WORDS = [
 ]
 
 class CategoryRequest(BaseModel):
-    memberId: Optional[int] = None
     location: Optional[str] = None
     workType: Optional[str] = None
     category: Optional[str] = None
 class FreeTextRequest(BaseModel):
-    memberId: Optional[int] = None
     location: Optional[str] = None
     workType: Optional[str] = None
     userMessage: Optional[str] = None
@@ -35,8 +33,6 @@ class FreeTextRequest(BaseModel):
 @router.post("/ai/chatbot/recommendation/base-info")
 def select_category(req: CategoryRequest):
     missing_fields = []
-    if req.memberId is None:
-        missing_fields.append("memberId")
     # 필수 필드 검사
     if not req.location:
         missing_fields.append("location")
@@ -82,8 +78,6 @@ def select_category(req: CategoryRequest):
 @router.post("/ai/chatbot/recommendation/free-text")
 def freetext_rag(req: FreeTextRequest):
     missing_fields = []
-    if req.memberId is None:
-        missing_fields.append("memberId")
     if not req.location:
         missing_fields.append("location")
     if not req.workType:
