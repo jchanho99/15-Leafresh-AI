@@ -1,11 +1,11 @@
 # LLM_chatbot_base_info_model.py
-# /ai/chatbot/recommendation/base-info 에서 받아와 답변 호출
 from google.cloud import aiplatform
 from vertexai.preview.generative_models import GenerativeModel
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts import PromptTemplate
 from google.oauth2 import service_account
 from fastapi import HTTPException
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import os
 import json
@@ -27,9 +27,9 @@ model = GenerativeModel(model_name=MODEL_NAME)
 
 # base-info_response_schemas 정의
 base_response_schemas = [
-    ResponseSchema(name="recommend", description="추천 설명 텍스트"),
-    ResponseSchema(name="challenges", description="추천 챌린지 리스트, 각 항목은 title, description 포함")
-]
+    ResponseSchema(name="recommend", description=f"추천 텍스트(예: '이런 챌린지를 추천합니다.')"),
+    ResponseSchema(name="challenges", description="추천 챌린지 리스트, 각 항목은 title, description 포함, description은 한 문장으로 요약해주세요.")
+                   ]
 
 # base-info_output_parser 정의 
 base_parser = StructuredOutputParser.from_response_schemas(base_response_schemas)
@@ -46,6 +46,7 @@ JSON 포맷:
 {escaped_format}
 
 응답은 반드시 위 JSON 형식 그대로, 마크다운 없이 순수 JSON만 출력하세요.
+
 """
 )
 
@@ -54,23 +55,27 @@ def get_llm_response(prompt):
     try:
         model = GenerativeModel(model_name=MODEL_NAME)
         response = model.generate_content(prompt)
+
         raw_text = response.text if hasattr(response, 'text') else response
-        if isinstance(raw_text, dict):
-            raw_text = str(raw_text)
+    
+        if isinstance(raw_text, dict): # dict이면 그대로 사용
+            parsed = raw_text
+        else:
+            text = raw_text.strip()
+            parsed = base_parser.parse(text)
+            if isinstance(parsed.get("challenges"), str):
+                parsed["challenges"] = json.loads(parsed["challenges"])
 
-        if not isinstance(raw_text, str):
-            raise ValueError("LLM 응답이 문자열이 아닙니다.")
+        return JSONResponse(
+            status_code=200,
+            content={
+                "status": 200,
+                "message": "성공!",
+                "data": parsed
+            }
+        )
 
-        text = raw_text.strip()
-        parsed = base_parser.parse(text)
-        if isinstance(parsed.get("challenges"), str):
-            parsed["challenges"] = json.loads(parsed["challenges"])  # JSON 문자열 파싱
-        return {
-            "status": 200,
-            "message": "성공!",
-            "data": parsed
-        }
     except HTTPException as http_err:
-        raise http_err  # 내부 HTTPException은 그대로 전달
+        raise http_err
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"챌린지 추천 중 내부 오류가 발생했습니다. 잠시 후 다시 시도해주세요.\n{str(e)}")
+        raise HTTPException(status_code=500, detail=f"챌린지 추천 중 내부 오류 발생: {str(e)}")
