@@ -3,9 +3,23 @@ import time
 from censorship_test_case import test_cases
 import pandas as pd
 from tabulate import tabulate
+from wcwidth import wcswidth
 
 model = CensorshipModel()
 results = []
+
+def tabulate_fixed(df: pd.DataFrame):
+    """한글 너비 고려한 tabulate 정렬"""
+    df_fixed = df.copy()
+    col_widths = {
+        col: max(wcswidth(str(val)) for val in df[col]) + 2
+        for col in df.columns
+    }
+
+    for col in df.columns:
+        df_fixed[col] = df_fixed[col].apply(lambda x: str(x).ljust(col_widths[col] - wcswidth(str(x)) + len(str(x))))
+
+    return tabulate(df_fixed, headers="keys", tablefmt="pretty", showindex=False)
 
 count = 0
 for idx, case in enumerate(test_cases, 1):
@@ -24,7 +38,6 @@ for idx, case in enumerate(test_cases, 1):
         print(f"[Test {idx}]")
     else:
         print(f"[Test {idx}] ❗")
-
 
 # 보고서 요약 출력
 df = pd.DataFrame(results)
@@ -53,7 +66,7 @@ print("=" * 60)
 
 if not failed_df.empty:
     print("\n[ 실패한 테스트 목록 ]\n")
-    print(tabulate(failed_df, headers="keys", tablefmt="pretty", showindex=False) + "\n")
+    print(tabulate_fixed(failed_df) + "\n")
 else:
     print("\n모든 테스트가 통과되었습니다! \n")
 

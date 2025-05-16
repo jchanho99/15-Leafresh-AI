@@ -21,7 +21,7 @@ class CensorshipModel :
         
         # 공백만 존재하거나 5자 이하 챌린지 이름 필터링
         if not challenge_name.strip() or len(challenge_name.strip()) <= 5:
-            return False, "동일한 챌린지가 존재하여 챌린지 생성이 불가능합니다."
+            return False, "글자 수가 너무 적어서 챌린지 생성이 불가능합니다."
         
         # 같은 단어가 3번 이상 반복된 경우
         words = challenge_name.strip().split()
@@ -29,17 +29,35 @@ class CensorshipModel :
         for word, count in word_counts.items():     # word 빼면 코드 실행 불가능 
             if count >= 3:
                 return False, "같은 단어가 반복적으로 사용되어 챌린지 생성이 불가능합니다."
+            
+        # 의미가 모호한 단어가 포함되어 있는 경우 (rule-based 필터)
+        ambiguous_keywords = ["그냥", "대충", "뭐든지", "뭔가", "어쩌구", "아무거나"]
+        for keyword in ambiguous_keywords:
+            if keyword in challenge_name:
+                return False, f"'{keyword}'와 같은 의미가 모호한 단어가 포함되어 있어 챌린지 생성이 불가능합니다."
+            
+        # 광고성/마케팅성 문구 사전 필터링
+        marketing_keywords = [
+            "드려요", "경품", "추첨", "무료", "혜택", "이벤트", "지금 참여", "같이 하면", "기념", "드림", "당첨"
+        ]
+        for keyword in marketing_keywords:
+            if keyword in challenge_name:
+                return False, f"'{keyword}'와 같은 마케팅성 문구가 포함되어 있어 챌린지 생성이 불가능합니다."
 
-        existing_names = "\n".join([f"- {c.name}" for c in existing if c.name]) or "- 없음"             # 모든 기존 챌린지 이름을 나열
+        # 모든 기존 챌린지 이름을 나열
+        existing_names = "\n".join([f"- {c.name}" for c in existing if c.name]) or "- 없음"             
 
         # 이름/의미 유사 여부만 판단
         prompt = (
             f"새로 생성하려는 챌린지 이름은 '{challenge_name}'입니다.\n"
             "기존 챌린지 이름 목록은 다음과 같습니다:\n"
             f"{existing_names}\n\n"
+            "기존 챌린지와 많은 부분 겹치는 경우에만 'No'라고 답해주세요. \n"
+            "예를 들어 '텀블러 챌린지'와 '텀블러 이용 챌린지', '텀블러 사용 챌린지' 등은 모두 많은 부분이 겹치므로 'No'라고 답해주세요. \n"
             "챌린지의 이름이 환경과 관련이 없거나 의미가 모호한 경우 'No'라고 답해주세요. \n"
             "의미가 모호하거나 명확하지 않은 문장(예: 대충, 뭐든지, 그냥, 뭔가 등)이 포함되어 있으면 'No'라고 답해주세요. \n"
             "새로운 챌린지와 이름이 같거나, 단어는 다르지만 의미나 목적이 유사한 챌린지가 존재한다면 'No'라고 답해주세요.\n"
+            "단어 순서가 다르거나 '매일', '도전하기', '습관화하기' 등이 추가된 경우에도 동일한 챌린지로 판단합니다. \n"
             "스팸이나 광고성, 홍보성, 마케팅성 문구일 경우 'No'라고 답해주세요. 하지만, 친환경과 관련된 경우 'Yes'라고 답해주세요. \n"
             "특수문자만 들어간 경우, 숫자만 들어간 경우 'No'라고 답해주세요. \n"
             "같은 단어가 여러번 반복되는 경우 'No'라고 답해주세요. \n"

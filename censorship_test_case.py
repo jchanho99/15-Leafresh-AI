@@ -110,7 +110,7 @@ test_cases = [
     },
     { # 10. 기존 챌린지와 전혀 다름 -> 생성 가능 
         "memberId": 10,
-        "challengeName": "이메일 휴지통 10개 비우기 챌린지",
+        "challengeName": "이메일 휴지통 비우기 챌린지",
         "startDate": "2025-05-14",
         "endDate": "2025-05-20",
         "challenge": [
