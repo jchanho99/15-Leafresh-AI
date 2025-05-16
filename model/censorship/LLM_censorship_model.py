@@ -103,5 +103,3 @@ class CensorshipModel :
         except Exception as e:
             print("[BUG] 응답 실패 ", e)
             return False, "챌린지 검열 중 오류가 발생했습니다."
-
-        
