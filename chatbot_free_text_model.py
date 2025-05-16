@@ -27,8 +27,8 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 3}) # 사용자 질문�
 
 # RAG 방식 챌린지 추천을 위한 Output Parser 정의
 rag_response_schemas = [
-    ResponseSchema(name="recommend", description="추천 텍스트(예: '이런 챌린지를 추천합니다.')"),
-    ResponseSchema(name="challenges", description="추천 챌린지 리스트, 각 항목은 title, description 포함")
+    ResponseSchema(name="recommend", description="추천 텍스트를 한문장으로 요약해줘.(예: '이런 챌린지를 추천합니다.')"),
+    ResponseSchema(name="challenges", description="추천 챌린지 리스트, 각 항목은 title, description 포함, description은 한 문장으로 요약해주세요.")
 ]
 
 # LangChain의 StructuredOutputParser를 사용하여 JSON 포맷을 정의
