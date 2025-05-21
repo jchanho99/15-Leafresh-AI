@@ -45,7 +45,7 @@ base_prompt = PromptTemplate(
 JSON 포맷:
 {escaped_format}
 
-응답은 반드시 위 JSON 형식 그대로, 마크다운 없이 순수 JSON만 출력하세요.
+응답은 반드시 위 JSON 형식 그대로 출력하세요.
 
 """
 )
