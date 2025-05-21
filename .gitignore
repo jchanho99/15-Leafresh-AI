@@ -1,0 +1,7 @@
+*.json
+.env
+.DS_Store
+__pycache__/
+__MACOSX/
+*.pyc
+__pycache__/
