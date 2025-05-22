@@ -1,6 +1,7 @@
 # chatbot_router.py
 from model.chatbot.LLM_chatbot_base_info_model import base_prompt, get_llm_response
-from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever, process_chat, clear_conversation
+# from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever, process_chat, clear_conversation
+from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
@@ -23,12 +24,12 @@ BAD_WORDS = [
     ]
 
 class CategoryRequest(BaseModel):
-    sessionId: Optional[str] = None
+    # sessionId: Optional[str] = None
     location: Optional[str] = None
     workType: Optional[str] = None
     category: Optional[str] = None
 class FreeTextRequest(BaseModel):
-    sessionId: Optional[str] = None
+    # sessionId: Optional[str] = None
     location: Optional[str] = None
     workType: Optional[str] = None
     message: Optional[str] = None
@@ -64,8 +65,8 @@ def select_category(req: CategoryRequest):
     try:
         response = get_llm_response(prompt)
         # sessionId가 있는 경우 대화 기록에 추가
-        if req.sessionId:
-            process_chat(req.sessionId, f"카테고리: {req.category}, 위치: {req.location}, 직업: {req.workType}")
+        # if req.sessionId:
+        #     process_chat(req.sessionId, f"카테고리: {req.category}, 위치: {req.location}, 직업: {req.workType}")
         return response
     except HTTPException as http_err:
         raise http_err # 내부 HTTPException을 먼저 처리
@@ -83,10 +84,6 @@ def select_category(req: CategoryRequest):
 @router.post("/ai/chatbot/recommendation/free-text")
 def freetext_rag(req: FreeTextRequest):
     missing_fields = []
-    if not req.location:
-        missing_fields.append("location")
-    if not req.workType:
-        missing_fields.append("workType")
     if not req.message or not req.message.strip():
         missing_fields.append("message")
 
@@ -125,10 +122,23 @@ def freetext_rag(req: FreeTextRequest):
     
     try:
         # 대화 기록을 포함한 응답 생성
-        response_text = process_chat(req.sessionId, req.message)
+        # response_text = process_chat(req.sessionId, req.message)
+        
+        # 임시로 직접 LLM 호출
+        response = qa_chain.invoke({
+            "context": "",
+            "query": req.message
+        })
         
         try:
             # JSON 파싱 시도
+            response_text = response["text"]
+            if "```json" in response_text:
+                response_text = response_text.split("```json")[1]
+            if "```" in response_text:
+                response_text = response_text.split("```")[0]
+            response_text = response_text.strip()
+            
             parsed = json.loads(response_text)
             
             if isinstance(parsed.get("challenges"), str):
