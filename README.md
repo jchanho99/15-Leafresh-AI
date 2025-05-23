@@ -12,6 +12,7 @@
 <img width="1000" alt="Leafresh_AI_아키텍처" src="https://github.com/user-attachments/assets/3979c999-945f-43f9-acdc-20739b0500d7" />
 
 <br>
+<br>
 
 ## ⚒️ Usage Stack
 
