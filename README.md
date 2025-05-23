@@ -9,7 +9,9 @@
 
 ## 📌 Quick View
 
-<img width="1000" alt="Leafresh_AI_아키텍처" src="https://github.com/user-attachments/assets/3979c999-945f-43f9-acdc-20739b0500d7" />
+### [영상 바로가기](https://drive.google.com/file/d/1O8r-uZpLbOSZO7-Ohy88Capj6l6PVkOI/view?usp=sharing)
+
+<img src="https://github.com/user-attachments/assets/a1bfcdfe-091a-4a44-b003-3383dcb38d1f" width="750">
 
 <br>
 <br>
@@ -56,6 +58,12 @@ no. | Note | Mothod | Endpoint | Role
 4 | 자유 입력 챌린지 추천 <br> : BE -> AI | POST | /ai/chatbot/recommendation/free-text | 자연어 기반 챌린지 추천 챗봇
 5 | 생성 검열 요청 <br> : BE -> AI | POST | /ai/challenges/group/validation | 챌린지 생성 요청 시, <br> 제목 유사성과 중복 여부를 기반으로 생성 가능성 판단
 6 | 주간 피드백 생성 요청 <br> : BE -> AI | POST | /ai/feedback | 사용자가 마이페이지에서 요청시, <br> 사용자 주간 데이터를 기반으로 피드백 생성
+
+<br>
+
+## 👉🏻 Service Architecture
+
+<img width="1000" alt="Leafresh_AI_아키텍처" src="https://github.com/user-attachments/assets/3979c999-945f-43f9-acdc-20739b0500d7" />
 
 <br>
 <br>
