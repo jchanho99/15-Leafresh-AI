@@ -42,7 +42,7 @@ no. | 기능 | 설명 | 사용 모델
 Model | Version | Accuracy | 개선 사항
 -- | -- | -- | --
 Censorship Model | v1.1 -> v1.2 | 66.00% -> `96.00%` | Rule-based 필터링 추가, 프롬프트 개선
-Verify Model | v1.1 -> v1.2 | 75.71% -> ing | LangChain 적용, 프롬프트 개선
+Verify Model | v1.1 -> v1.2 | 75.71% -> `98.68` | LangChain 적용, 이미지 리사이징, 프롬프트 개선
 
 <br>
 
