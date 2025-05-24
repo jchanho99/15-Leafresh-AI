@@ -1,17 +1,33 @@
 ### 챌린지 이미지 인증 요청 테스트 (FastAPI)
-POST http://localhost:8000/ai/image/verification
+POST http://localhost:9000/ai/image/verification
 Content-Type: application/json
 
 {
-  "verificationId": 1,
-  "type": "PERSONAL",
-  "imageUrl": "https://storage.cloud.google.com/leafresh-images/example2.png",
-  "memberId": 111,
-  "challengeId": 1000,
-  "date": "2025-05-02",
-  "challengeName": "텀블러 챌린지"
+  "verificationId": 110,
+  "type": "GROUP",
+  "imageUrl": "https://storage.googleapis.com/leafresh-images/1747987094110-2b84faf8-259d-49c3-8ebb-b96c8cc580ca-camera-capture.jpg",
+  "memberId": 112,
+  "challengeId": 1,
+  "date": "2025-05-24",
+  "challengeName": "SNS에 습지 보호 캠페인 알리기"
 }
 
-# gs://leafresh-images/example2.png
+
+### 챌린지 이미지 인증 요청 테스트 (FastAPI)
+POST http://localhost:9000/ai/image/verification
+Content-Type: application/json
+
+{
+  "verificationId": 120,
+  "type": "GROUP",
+  "imageUrl": "https://storage.googleapis.com/leafresh-images/init/1_%E1%84%8B%E1%85%B5%E1%84%87%E1%85%A6%E1%86%AB%E1%84%90%E1%85%B3_%E1%84%89%E1%85%B5%E1%86%AF%E1%84%91%E1%85%A2.png",
+  "memberId": 111,
+  "challengeId": 1,
+  "date": "2025-05-24",
+  "challengeName": "SNS에 습지 보호 캠페인 알리기"
+}
+
+
+
 
 

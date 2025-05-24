@@ -23,9 +23,11 @@ def run_worker():
         try:
             data = json.loads(message.data.decode("utf-8"))
             blob_name = data["imageUrl"].split("/")[-1]
-            challenge_type = data["challengeName"]
+            challenge_type = data["type"]
+            challenge_id = int(data["challengeId"])
+            challenge_name = data["challengeName"]
 
-            result = verifier.image_verify(os.getenv("BUCKET_NAME"), blob_name, challenge_type)
+            result = verifier.image_verify(os.getenv("BUCKET_NAME"), blob_name, challenge_type, challenge_id, challenge_name)
             
             # 로깅용
             print(f"인증 결과: {result}")
@@ -58,3 +60,4 @@ def run_worker():
     future = subscriber.subscribe(subscription_path, callback=callback)
     print(f"Listening on {subscription_path}...")
     future.result()
+

@@ -68,3 +68,4 @@ async def receive_result(verificationId: int, data: CallbackResult):
             "verificationId": verificationId
         }
     )
+
