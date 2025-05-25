@@ -53,13 +53,13 @@ class ImageVerifyModel :
             return f"[에러] GCS 이미지 로드 실패: {e}" 
 
 
-    def select_prompt(self, challenge_type: str, challenge_id: int, challenge_name: str):
+    def select_prompt(self, challenge_type: str, challenge_id: int):
         if challenge_type.upper() == "GROUP" and 1 <= challenge_id <= 17:
-            return event_challenge_prompts.get(challenge_name)
+            return event_challenge_prompts.get(challenge_id)
         return None
 
     def response(self, image, challenge_type, challenge_id, challenge_name):
-        prompt_template = self.select_prompt(challenge_type, challenge_id, challenge_name)
+        prompt_template = self.select_prompt(challenge_type, challenge_id)
 
         if prompt_template:
             # LangChain 방식 (이벤트 챌린지)
