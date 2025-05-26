@@ -8,12 +8,12 @@ import os
 # import requests
 # SSE 통신
 import asyncio
-from .sse_sender import SSESender
+from model.verify.sse_sender import SSESender
 
 load_dotenv()
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_PUBSUB")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-project_id = os.getenv("GOOGLE_CLOUD_PROJECT_PUBSUB")
+project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 subscription_id = os.getenv("PUBSUB_SUBSCRIPTION")
 
 subscription_path = f"projects/{project_id}/subscriptions/{subscription_id}"
@@ -66,7 +66,7 @@ def run_worker():
             }
 
             # SSE 방식으로 결과 전송
-            asyncio.run(sender(data["verificationId"], result_payload))
+            asyncio.run(sender.send(data["verificationId"], result_payload))
 
             message.ack()
 
