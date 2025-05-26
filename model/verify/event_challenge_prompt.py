@@ -257,5 +257,3 @@ event_challenge_prompts = {
         "예/아니오로만 대답해주세요."
     ),
 '''
-
-

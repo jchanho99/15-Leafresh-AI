@@ -91,5 +91,3 @@ class ImageVerifyModel :
 
         return result.text
     
-
-

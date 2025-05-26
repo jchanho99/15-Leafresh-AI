@@ -34,4 +34,3 @@ app.include_router(chatbot_router)
 # censorship model exceptions (422, 500, 503 etc.)
 app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(HTTPException, http_exception_handler)
-

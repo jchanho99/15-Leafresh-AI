@@ -78,10 +78,6 @@ def select_category(req: CategoryRequest):
 @router.post("/ai/chatbot/recommendation/free-text")
 def freetext_rag(req: FreeTextRequest):
     missing_fields = []
-    if not req.location:
-        missing_fields.append("location")
-    if not req.workType:
-        missing_fields.append("workType")
     if not req.message or not req.message.strip():
         missing_fields.append("message")
 

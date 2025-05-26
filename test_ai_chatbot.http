@@ -1,21 +1,19 @@
 ### base-info 방식 (카테고리 선택 기반 추천)
-POST http://localhost:8000/ai/chatbot/recommendation/base-info
+POST http://localhost:9000/ai/chatbot/recommendation/base-info
 Content-Type: application/json
 
 {
   "location": "도시",
   "workType": "사무직",
-  "category": "제로웨이스트"
+  "category": "비건"
 }
 
 ###
 
 ### free-text 방식 (자유 텍스트 기반 추천)
-POST http://localhost:8000/ai/chatbot/recommendation/free-text
+POST http://localhost:9000/ai/chatbot/recommendation/free-text
 Content-Type: application/json
 
 {
-  "location": "바다",
-  "workType": "사무직",
-  "message": "친환경 챌린지 추천해주세요."
+  "message": "비건 관련 챌린지 추천"
 }

@@ -60,4 +60,3 @@ def run_worker():
     future = subscriber.subscribe(subscription_path, callback=callback)
     print(f"Listening on {subscription_path}...")
     future.result()
-
