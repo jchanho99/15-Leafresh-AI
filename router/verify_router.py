@@ -28,7 +28,7 @@ class ImageVerificationResponse(BaseModel):
 @router.post("/ai/image/verification", response_model=ImageVerificationResponse, status_code=202)
 async def verify_image(req: ImageVerificationRequest):
     try:
-        data = req.dict()
+        data = req.model_dump()         # req.dict() -> req.model_dump()
         data["date"] = str(req.date)
         add_task(data)
 
