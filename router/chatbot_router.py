@@ -1,6 +1,5 @@
 # chatbot_router.py
 from model.chatbot.LLM_chatbot_base_info_model import base_prompt, get_llm_response
-# from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever, process_chat, clear_conversation
 from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
@@ -24,12 +23,10 @@ BAD_WORDS = [
     ]
 
 class CategoryRequest(BaseModel):
-    # sessionId: Optional[str] = None
     location: Optional[str] = None
     workType: Optional[str] = None
     category: Optional[str] = None
 class FreeTextRequest(BaseModel):
-    # sessionId: Optional[str] = None
     location: Optional[str] = None
     workType: Optional[str] = None
     message: Optional[str] = None
@@ -64,9 +61,6 @@ def select_category(req: CategoryRequest):
 
     try:
         response = get_llm_response(prompt)
-        # sessionId가 있는 경우 대화 기록에 추가
-        # if req.sessionId:
-        #     process_chat(req.sessionId, f"카테고리: {req.category}, 위치: {req.location}, 직업: {req.workType}")
         return response
     except HTTPException as http_err:
         raise http_err # 내부 HTTPException을 먼저 처리
@@ -120,55 +114,60 @@ def freetext_rag(req: FreeTextRequest):
             }
         )
     
+    # 필수 필드 검사
     try:
-        # 대화 기록을 포함한 응답 생성
-        # response_text = process_chat(req.sessionId, req.message)
-        
-        # 임시로 직접 LLM 호출
-        response = qa_chain.invoke({
-            "context": "",
+        docs = retriever.invoke(req.message)
+        print(f" 검색된 문서 수: {len(docs)}")
+        for i, doc in enumerate(docs):
+            print(f" [문서 {i+1}] {doc.page_content}")
+
+        context_text = "\n".join([doc.page_content for doc in docs])
+
+        # PromptTemplate의 input_variables에 맞춰 context와 query를 전달
+        variables = {
+            "context": context_text,
             "query": req.message
-        })
+        }
         
-        try:
-            # JSON 파싱 시도
-            response_text = response["text"]
-            if "```json" in response_text:
-                response_text = response_text.split("```json")[1]
-            if "```" in response_text:
-                response_text = response_text.split("```")[0]
-            response_text = response_text.strip()
+        # LLM 응답 결과
+        rag_result = qa_chain.invoke(variables)
+        raw_result = rag_result.get("text", "")
+        match = re.search(r'{.*}', raw_result, re.DOTALL)
+        if match:
+            try:
+                json_str = match.group()
+                parsed = json.loads(json_str)
+
+                if isinstance(parsed.get("challenges"), str):
+                    parsed["challenges"] = json.loads(parsed["challenges"])
+
+                return JSONResponse(
+                    status_code=200,
+                    content={
+                        "status": 200,
+                        "message": "사용자 자유 메시지를 기반으로 챌린지를 추천합니다.",
+                        "data": parsed
+                    } 
+                )
             
-            parsed = json.loads(response_text)
+            except Exception as parse_err:
+                return JSONResponse(
+                    status_code=500,
+                    content={
+                        "status": 500,
+                        "message": f"챌린지 추천 중 내부 오류가 발생했습니다. 잠시 후 다시 시도해주세요.", # JSON 파싱 오류
+                        "data": None
+                    }
+                )
             
-            if isinstance(parsed.get("challenges"), str):
-                parsed["challenges"] = json.loads(parsed["challenges"])
-            
-            return JSONResponse(
-                status_code=200,
-                content={
-                    "status": 200,
-                    "message": "사용자 자유 메시지를 기반으로 챌린지를 추천합니다.",
-                    "data": parsed
-                }
-            )
-            
-        except json.JSONDecodeError:
-            return JSONResponse(
-                status_code=500,
-                content={
-                    "status": 500,
-                    "message": "챌린지 추천 중 내부 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
-                    "data": None
-                }
-            )
-            
+    except HTTPException as http_err:
+        raise http_err  # 내부 HTTPException을 먼저 처리
     except Exception as e:
         return JSONResponse(
             status_code=502,
             content={
                 "status": 502,
-                "message": "AI 서버로부터 추천 결과를 받아오는 데 실패했습니다.",
+                "message": f"AI 서버로부터 추천 결과를 받아오는 데 실패했습니다.", # AI 서버 오류
                 "data": None
-            }
+                }
         )
