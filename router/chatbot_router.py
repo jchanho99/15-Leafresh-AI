@@ -27,8 +27,6 @@ class CategoryRequest(BaseModel):
     workType: Optional[str] = None
     category: Optional[str] = None
 class FreeTextRequest(BaseModel):
-    location: Optional[str] = None
-    workType: Optional[str] = None
     message: Optional[str] = None
 
 # 비-RAG 방식 챌린지 추천

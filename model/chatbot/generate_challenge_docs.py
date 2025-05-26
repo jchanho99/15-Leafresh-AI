@@ -35,7 +35,7 @@ def fetch_environmental_news():
         urls_to_visit = [f"{base_url}/news/articleList.html?sc_section_code=S1N3"]
         article_links = set() # 수집한 기사 상세 페이지 링크
         
-        while urls_to_visit and len(visited_list_urls) < 20:  # 최대 20개 목록 페이지까지
+        while urls_to_visit and len(visited_list_urls) < 10:  # 최대 20개 목록 페이지까지
             current_list_url = urls_to_visit.pop(0)
             if current_list_url in visited_list_urls:
                 continue
@@ -66,7 +66,7 @@ def fetch_environmental_news():
                     urls_to_visit.append(next_url)
             
             visited_list_urls.add(current_list_url)
-            time.sleep(1)  # 서버 부하 방지
+            time.sleep(0.3)  # 서버 부하 방지
             
     except Exception as e:
         print(f"환경일보 목록 크롤링 중 오류 발생: {str(e)}")
@@ -106,7 +106,7 @@ def fetch_environmental_news():
             else:
                 print("    - 제목 또는 본문 요소를 찾지 못했습니다.") # 요소 못 찾음 시 로깅
             
-            time.sleep(1)  # 서버 부하 방지
+            time.sleep(0.5)  # 서버 부하 방지
             
         except Exception as e:
             print(f"    - 기사 상세 페이지 크롤링 중 오류 발생: {str(e)}") # 오류 발생 시 로깅
