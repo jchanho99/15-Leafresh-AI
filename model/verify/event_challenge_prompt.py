@@ -1,4 +1,3 @@
-
 from langchain.prompts import PromptTemplate
 
 event_challenge_prompts = {

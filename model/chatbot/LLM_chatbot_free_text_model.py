@@ -7,10 +7,7 @@ from qdrant_client import QdrantClient
 from langchain_google_vertexai import VertexAI
 from dotenv import load_dotenv
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
-# from langgraph.graph import StateGraph, END
-from typing import TypedDict, Annotated, Sequence, Optional, Dict, List
 import os
-import json
 
 load_dotenv()
 
@@ -27,11 +24,11 @@ vectorstore = Qdrant(
     embeddings=embedding_model
 )
 
-retriever = vectorstore.as_retriever(search_kwargs={"k": 5}) # 사용자 질문으로 부터 가장 유사한 10개 문서 검색
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3}) # 사용자 질문으로 부터 가장 유사한 3개 문서 검색
 
 # RAG 방식 챌린지 추천을 위한 Output Parser 정의
 rag_response_schemas = [
-    ResponseSchema(name="recommend", description="추천 텍스트를 한 문장으로 출력해줘."),
+    ResponseSchema(name="recommend", description="추천 텍스트를 한 문장으로 출력해줘.(예: '이런 챌린지를 추천합니다.')"),
     ResponseSchema(name="challenges", description="추천 챌린지 리스트, 각 항목은 title, description 포함, description은 한 문장으로 요약해주세요.")
 ]
 
@@ -45,16 +42,18 @@ escaped_format = rag_parser.get_format_instructions().replace("{", "{{").replace
 custom_prompt = PromptTemplate(
     input_variables=["context", "query"],
     template=f"""
-반드시 문서에서 제공된 정보를 참고햐여 사용자에게 적절한 친환경 챌린지를 3개 추천해주세요.
+다음 문서를 반드시 참고하여 사용자에게 적절한 친환경 챌린지를 3개 추천해주세요.
 
 문서:
 {{context}}
 
-현재 요청:
+요청:
 {{query}}
 
-응답은 반드시 다음 JSON 형식을 따라주세요:
+JSON 포맷:
 {escaped_format}
+- challenges는 반드시 리스트([]) 형태로 출력하세요.
+- 문자열 형태로 묶지 말고, 리스트 그대로 출력하세요.
 """
 )
 

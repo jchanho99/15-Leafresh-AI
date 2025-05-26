@@ -20,7 +20,7 @@ load_dotenv()
 # pubsub_v1이 동기로 실행되므로 async를 붙이지 않음 
 @asynccontextmanager
 async def lifespan(app: FastAPI):               # app 인자를 받는 형태가 아니면 에러가 발생하므로 삭제 불가능 
-    threading.Thread(target=run_worker, daemon=True).start() # FastAPI 서버 실행과 동시에 Pub/Sub 워커를 다른 작업 흐름에서 병렬로 처리하기 위해서 스레딩 사용 
+    threading.Thread(target=run_worker, daemon=True).start()
     yield
 
 # app 초기화
