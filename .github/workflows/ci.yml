@@ -74,12 +74,16 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-kellyn
           push: true
-          tags: jchanho99/ai-images-dev:latest
+          tags: jchanho99/ai-image-dev:latest
           cache-from: type=gha,scope=build-ai-kellyn
           cache-to: type=gha,mode=max,scope=build-ai-kellyn
 
@@ -97,14 +101,19 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-kellyn
           push: true
-          tags: jchanho99/ai-images-prod:latest
+          tags: jchanho99/ai-image-prod:latest
           cache-from: type=gha,scope=build-ai-kellyn
           cache-to: type=gha,mode=max,scope=build-ai-kellyn
+
 
   # ✅ MAC - Unit Test
   unit-test-mac:
@@ -152,7 +161,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-mac
@@ -160,6 +173,7 @@ jobs:
           tags: jchanho99/ai-text-dev:latest
           cache-from: type=gha,scope=build-ai-mac
           cache-to: type=gha,mode=max,scope=build-ai-mac
+
 
   # ✅ MAC - Build Prod
   build-prod-mac:
@@ -175,7 +189,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - uses: docker/build-push-action@v5
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-mac
@@ -183,3 +201,4 @@ jobs:
           tags: jchanho99/ai-text-prod:latest
           cache-from: type=gha,scope=build-ai-mac
           cache-to: type=gha,mode=max,scope=build-ai-mac
+
