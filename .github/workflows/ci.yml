@@ -1,0 +1,185 @@
+name: AI Project CI
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+    paths:
+      - 'Image/**'
+      - 'Text/**'
+  
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - '.github/workflows/**'  # CI 파일 위치 포함
+  
+  workflow_dispatch:
+    inputs:
+      target_test:
+        description: '수행할 대상(AI 프로젝트)을 선택하세요'
+        required: true
+        type: choice
+        options:
+          - kellyn
+          - mac
+
+jobs:
+
+  # ✅ KELLYN - Unit Test
+  unit-test-kellyn:
+    name: Unit Test - AI-kellyn
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Image
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: |
+          pip install pytest
+          pytest ./tests
+
+  # ✅ KELLYN - Integration Test
+  integration-test-kellyn:
+    name: Integration Test - AI-kellyn
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Image
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          chmod +x verify_curl_test.sh
+          ./verify_curl_test.sh
+
+  # ✅ KELLYN - Build Dev
+  build-dev-kellyn:
+    name: Build Dev - AI-kellyn
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Image
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile-ai-kellyn
+          push: true
+          tags: jchanho99/ai-images-dev:latest
+          cache-from: type=gha,scope=build-ai-kellyn
+          cache-to: type=gha,mode=max,scope=build-ai-kellyn
+
+  # ✅ KELLYN - Build Prod
+  build-prod-kellyn:
+    name: Build Prod - AI-kellyn
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Image
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile-ai-kellyn
+          push: true
+          tags: jchanho99/ai-images-prod:latest
+          cache-from: type=gha,scope=build-ai-kellyn
+          cache-to: type=gha,mode=max,scope=build-ai-kellyn
+
+  # ✅ MAC - Unit Test
+  unit-test-mac:
+    name: Unit Test - AI-mac
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: |
+          pip install pytest
+          pytest ./tests
+
+  # ✅ MAC - Integration Test
+  integration-test-mac:
+    name: Integration Test - AI-mac
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          chmod +x censorship_curl_test.sh
+          ./censorship_curl_test.sh
+
+  # ✅ MAC - Build Dev
+  build-dev-mac:
+    name: Build Dev - AI-mac
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile-ai-mac
+          push: true
+          tags: jchanho99/ai-text-dev:latest
+          cache-from: type=gha,scope=build-ai-mac
+          cache-to: type=gha,mode=max,scope=build-ai-mac
+
+  # ✅ MAC - Build Prod
+  build-prod-mac:
+    name: Build Prod - AI-mac
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile-ai-mac
+          push: true
+          tags: jchanho99/ai-text-prod:latest
+          cache-from: type=gha,scope=build-ai-mac
+          cache-to: type=gha,mode=max,scope=build-ai-mac
