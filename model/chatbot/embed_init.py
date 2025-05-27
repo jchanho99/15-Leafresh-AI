@@ -10,6 +10,7 @@ from langchain.schema import Document
 from dotenv import load_dotenv
 import os
 import hashlib
+import time  # time 모듈 추가
 
 load_dotenv()
 
