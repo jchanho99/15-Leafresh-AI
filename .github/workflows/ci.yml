@@ -8,7 +8,12 @@ on:
     paths:
       - 'Image/**'
       - 'Text/**'
-
+  pull_request:
+    branches:
+      - develop
+      - main
+    paths:
+      - '.github/workflows/**'  # CI 파일 위치 포함
   workflow_dispatch:
     inputs:
       target_test:
