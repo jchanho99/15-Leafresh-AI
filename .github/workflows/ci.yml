@@ -2,114 +2,177 @@ name: AI Project CI
 
 on:
   push:
-    branches: [ "develop", "main" ]
+    branches:
+      - develop
+      - main
     paths:
-      - 'AI-kellyn/**'
-      - 'AI-mac/**'
-
-  pull_request:
-    branches: [ "develop", "main" ]
-    paths:
-      - 'AI-kellyn/**'
-      - 'AI-mac/**'
+      - 'Image/**'
+      - 'Text/**'
 
   workflow_dispatch:
     inputs:
-      target_job:
-        description: '실행할 Job을 선택하세요'
-        required: false
+      target_test:
+        description: '수행할 대상(AI 프로젝트)을 선택하세요'
+        required: true
         type: choice
         options:
-          - ci-kellyn
-          - ci-mac
+          - kellyn
+          - mac
 
 jobs:
-  ci-kellyn:
-    name: CI - AI-kellyn
-    if: github.event_name != 'workflow_dispatch' || github.event.inputs.target_job == 'ci-kellyn'
+
+  # ✅ KELLYN - Unit Test
+  unit-test-kellyn:
+    name: Unit Test - AI-kellyn
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./images
+        working-directory: ./Image
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Python 3.12
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-      #- name: Lint
-      #  run: |
-      #    pip install flake8
-      #    flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Unit Tests
-        run: |
+      - run: pip install -r requirements.txt
+      - run: |
           pip install pytest
           pytest ./tests
-      - name: Integration Tests
-        run: |
-          pip install pytest httpx
-          uvicorn main:app --host 0.0.0.0 --port 8000 --background &
-          sleep 5
-          pytest ./integration_tests
-          pkill uvicorn
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+
+  # ✅ KELLYN - Integration Test
+  integration-test-kellyn:
+    name: Integration Test - AI-kellyn
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Image
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          chmod +x verify_curl_test.sh
+          ./verify_curl_test.sh
+
+  # ✅ KELLYN - Build Dev
+  build-dev-kellyn:
+    name: Build Dev - AI-kellyn
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Image
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-kellyn
           push: true
-          tags: jchanho99/ai-images-dev:latest # Replace with your Docker Hub username
+          tags: jchanho99/ai-images-dev:latest
           cache-from: type=gha,scope=build-ai-kellyn
           cache-to: type=gha,mode=max,scope=build-ai-kellyn
 
-  ci-mac:
-    name: CI - AI-mac
-    if: github.event_name != 'workflow_dispatch' || github.event.inputs.target_job == 'ci-mac'
+  # ✅ KELLYN - Build Prod
+  build-prod-kellyn:
+    name: Build Prod - AI-kellyn
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./text
+        working-directory: ./Image
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Python 3.12
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
-      #- name: Lint
-      #  run: |
-      #    pip install flake8
-      #    flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: Unit Tests
-        run: |
-          pip install pytest
-          pytest ./tests
-      - name: Integration Tests
-        run: |
-          pip install pytest httpx
-          uvicorn main:app --host 0.0.0.0 --port 8000 --background &
-          sleep 5
-          pytest ./integration_tests
-          pkill uvicorn
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
+      - uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Build and Push Docker Image
-        uses: docker/build-push-action@v5
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile-ai-kellyn
+          push: true
+          tags: jchanho99/ai-images-prod:latest
+          cache-from: type=gha,scope=build-ai-kellyn
+          cache-to: type=gha,mode=max,scope=build-ai-kellyn
+
+  # ✅ MAC - Unit Test
+  unit-test-mac:
+    name: Unit Test - AI-mac
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: |
+          pip install pytest
+          pytest ./tests
+
+  # ✅ MAC - Integration Test
+  integration-test-mac:
+    name: Integration Test - AI-mac
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          chmod +x censorship_curl_test.sh
+          ./censorship_curl_test.sh
+
+  # ✅ MAC - Build Dev
+  build-dev-mac:
+    name: Build Dev - AI-mac
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-mac
           push: true
-          tags: jchanho99/ai-text-dev:latest # Replace with your Docker Hub username
+          tags: jchanho99/ai-text-dev:latest
+          cache-from: type=gha,scope=build-ai-mac
+          cache-to: type=gha,mode=max,scope=build-ai-mac
+
+  # ✅ MAC - Build Prod
+  build-prod-mac:
+    name: Build Prod - AI-mac
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Text/LLM
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile-ai-mac
+          push: true
+          tags: jchanho99/ai-text-prod:latest
           cache-from: type=gha,scope=build-ai-mac
           cache-to: type=gha,mode=max,scope=build-ai-mac
