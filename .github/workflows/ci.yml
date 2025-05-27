@@ -23,15 +23,17 @@ on:
         required: true
         type: choice
         options:
-          - kellyn
-          - mac
+          - kellyn-dev
+          - mac-dev
+          - kellyn-prod
+          - mac-prod
 
 jobs:
 
   # ✅ KELLYN - Unit Test
   unit-test-kellyn:
     name: Unit Test - AI-kellyn
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn-dev'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -49,7 +51,7 @@ jobs:
   # ✅ KELLYN - Integration Test
   integration-test-kellyn:
     name: Integration Test - AI-kellyn
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn-prod'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -118,7 +120,7 @@ jobs:
   # ✅ MAC - Unit Test
   unit-test-mac:
     name: Unit Test - AI-mac
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac-dev'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -136,7 +138,7 @@ jobs:
   # ✅ MAC - Integration Test
   integration-test-mac:
     name: Integration Test - AI-mac
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac-prod'
     runs-on: ubuntu-latest
     defaults:
       run:
