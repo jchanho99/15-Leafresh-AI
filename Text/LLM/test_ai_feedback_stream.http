@@ -1,0 +1,41 @@
+### Test Feedback Stream (SSE)
+POST http://localhost:9000/api/members/feedback/stream
+Content-Type: application/json
+Accept: text/event-stream
+
+{
+  "memberId": "user123",
+  "personalChallenges": [
+    {
+      "title": "비건 음식 먹기",
+      "isSuccess": true
+    },
+    {
+      "title": "저녁 식사 기록",
+      "isSuccess": false
+    }
+  ],
+  "groupChallenges": [
+    {
+      "title": "주 3회 플로깅",
+      "startDate": "2023-10-26T00:00:00Z",
+      "endDate": "2023-11-01T00:00:00Z",
+      "submissions": [
+        {
+          "submittedAt": "2023-10-27T10:00:00Z",
+          "isSuccess": true
+        },
+        {
+          "submittedAt": "2023-10-29T11:00:00Z",
+          "isSuccess": true
+        },
+        {
+          "submittedAt": "2023-10-31T09:30:00Z",
+          "isSuccess": false
+        }
+      ]
+    }
+  ]
+}
+
+### 
