@@ -11,9 +11,9 @@ import asyncio
 from .sse_sender import SSESender
 
 load_dotenv()
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_PUBSUB")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-project_id = os.getenv("GOOGLE_CLOUD_PROJECT_PUBSUB")
+project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 subscription_id = os.getenv("PUBSUB_SUBSCRIPTION")
 
 subscription_path = f"projects/{project_id}/subscriptions/{subscription_id}"

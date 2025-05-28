@@ -4,9 +4,9 @@ import json, os
 from dotenv import load_dotenv
 
 load_dotenv()
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_PUBSUB")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-project_id = os.getenv("GOOGLE_CLOUD_PROJECT_PUBSUB")
+project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 topic_id = os.getenv("PUBSUB_TOPIC")
 
 publisher = pubsub_v1.PublisherClient()
