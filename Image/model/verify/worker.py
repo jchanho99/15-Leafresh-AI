@@ -8,18 +8,19 @@ import os
 # import requests
 # SSE 통신
 import asyncio
-from sse_sender import send_sse_result
+from .sse_sender import SSESender
 
 load_dotenv()
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_PUBSUB")
 
-project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
+project_id = os.getenv("GOOGLE_CLOUD_PROJECT_PUBSUB")
 subscription_id = os.getenv("PUBSUB_SUBSCRIPTION")
 
 subscription_path = f"projects/{project_id}/subscriptions/{subscription_id}"
 
 subscriber = pubsub_v1.SubscriberClient()
 verifier = ImageVerifyModel()
+sender = SSESender()
 
 def run_worker():
     def callback(message):
@@ -65,7 +66,7 @@ def run_worker():
             }
 
             # SSE 방식으로 결과 전송
-            asyncio.run(send_sse_result(data["verificationId"], result_payload))
+            asyncio.run(sender(data["verificationId"], result_payload))
 
             message.ack()
 
