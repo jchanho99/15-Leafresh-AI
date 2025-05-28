@@ -39,7 +39,7 @@ jobs:
       run:
         working-directory: ./Image
     env:
-      GOOGLE_CREDENTIAL_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup Pyton
@@ -58,7 +58,7 @@ jobs:
       
       - name: Write credentials.json safely (using printf)
         run: |
-          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
 
       - name: Check contents of credentials.json
         run: cat credentials.json
@@ -101,7 +101,7 @@ jobs:
       
       - name: Write credentials.json safely (using printf)
         run: |
-          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
 
       - name: Check contents of credentials.json
         run: cat credentials.json
@@ -193,7 +193,7 @@ jobs:
       run:
         working-directory: ./Text/LLM
     env:
-      GOOGLE_CREDENTIAL_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
     
     steps:
       - uses: actions/checkout@v3
@@ -213,7 +213,7 @@ jobs:
       
       - name: Write credentials.json safely (using printf)
         run: |
-          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
 
       - name: Check contents of credentials.json
         run: cat credentials.json
@@ -254,7 +254,7 @@ jobs:
       
       - name: Write credentials.json safely (using printf)
         run: |
-          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
 
       - name: Check contents of credentials.json
         run: cat credentials.json
