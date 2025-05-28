@@ -121,6 +121,10 @@ jobs:
         run: |
           chmod +x verify_curl_test.sh
           ./verify_curl_test.sh
+      
+      - name: Check Uvicorn Log
+        if: failure()
+        run: cat uvicorn.log
 
       - name: Stop Uvicorn
         run: pkill -f "uvicorn"
@@ -270,7 +274,11 @@ jobs:
         run: |
           chmod +x censorship_curl_test.sh
           ./censorship_curl_test.sh
-
+      
+      - name: Check Uvicorn Log
+        if: failure()
+        run: cat uvicorn.log
+      
       - name: Stop Uvicorn
         run: pkill -f "uvicorn"
 
