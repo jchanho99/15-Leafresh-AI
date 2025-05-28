@@ -38,6 +38,8 @@ jobs:
     defaults:
       run:
         working-directory: ./Image
+    env:
+      GOOGLE_CREDENTIAL_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup Pyton
@@ -46,12 +48,18 @@ jobs:
           python-version: "3.12"
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
-
+             
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
+      
+      - name: Write service account key to file
+        run: echo "$GOOGLE_CREDENTIAL_JSON" > credentials.json
+
+      - name: Set GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
       
       - name: Install Dependencies
         run: pip install -r requirements.txt
@@ -159,6 +167,9 @@ jobs:
     defaults:
       run:
         working-directory: ./Text/LLM
+    env:
+      GOOGLE_CREDENTIAL_JSON: ${{ secrets.GCP_CREDENTIALS_JSON }}
+    
     steps:
       - uses: actions/checkout@v3
       - name: Setup Pyton
@@ -167,13 +178,19 @@ jobs:
           python-version: "3.12"
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
-
+      
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
-          
+      
+      - name: Write service account key to file
+        run: echo "$GOOGLE_CREDENTIAL_JSON" > credentials.json
+
+      - name: Set GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
+      
       - name: Install Dependencies
         run: pip install -r requirements.txt
       
