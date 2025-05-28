@@ -1,10 +1,6 @@
 # chatbot_router.py
-from model.chatbot.LLM_chatbot_base_info_model import base_prompt, get_llm_response
-<<<<<<< HEAD
-from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever
-=======
-from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever, process_chat, clear_conversation
->>>>>>> 308479e (v2: version_API)
+from ..model.chatbot.LLM_chatbot_base_info_model import base_prompt, get_llm_response
+from ..model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever, process_chat, clear_conversation
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
@@ -85,10 +81,6 @@ def select_category(req: CategoryRequest):
 @router.post("/ai/chatbot/recommendation/free-text")
 def freetext_rag(req: FreeTextRequest):
     missing_fields = []
-    if not req.location:
-        missing_fields.append("location")
-    if not req.workType:
-        missing_fields.append("workType")
     if not req.message or not req.message.strip():
         missing_fields.append("message")
 
