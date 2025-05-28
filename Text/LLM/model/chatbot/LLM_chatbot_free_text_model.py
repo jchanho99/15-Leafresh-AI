@@ -27,7 +27,7 @@ vectorstore = Qdrant(
     embeddings=embedding_model
 )
 
-retriever = vectorstore.as_retriever(search_kwargs={"k": 3}) # 사용자 질문으로 부터 가장 유사한 3개 문서 검색
+retriever = vectorstore.as_retriever(search_kwargs={"k": 5}) # 사용자 질문으로 부터 가장 유사한 3개 문서 검색
 
 # RAG 방식 챌린지 추천을 위한 Output Parser 정의
 rag_response_schemas = [
@@ -46,11 +46,9 @@ custom_prompt = PromptTemplate(
     input_variables=["context", "query", "messages"],
     template=f"""
 다음 문서와 이전 대화 기록을 참고하여 사용자에게 적절한 친환경 챌린지를 3개 추천해주세요.
-반드시 문서에서 제공된 정보를 기반으로 답변해주세요.
 
 이전 대화 기록:
 {{messages}}
->>>>>>> 308479e (v2: version_API)
 
 문서:
 {{context}}
@@ -247,7 +245,6 @@ def clear_conversation(sessionId: str):
 
 def get_conversation_history(sessionId: str) -> List[str]:
     """대화 기록 조회
-    
     Args:
         sessionId: 사용자 세션 ID
     
