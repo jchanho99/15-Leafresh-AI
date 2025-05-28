@@ -124,7 +124,10 @@ jobs:
 
   build-dev-kellyn:
     name: Build Dev - AI-kellyn
-    if: github.ref == 'refs/heads/develop'
+    needs: unit-test-kellyn
+    if: |
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.target_test == 'kellyn-dev'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -147,7 +150,10 @@ jobs:
 
   build-prod-kellyn:
     name: Build Prod - AI-kellyn
-    if: github.ref == 'refs/heads/main'
+    needs: integration-test-kellyn
+    if: |
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.target_test == 'kellyn-prod'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -247,7 +253,10 @@ jobs:
 
   build-dev-mac:
     name: Build Dev - AI-mac
-    if: github.ref == 'refs/heads/develop'
+    needs: unit-test-mac
+    if: |
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.target_test == 'mac-dev'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -270,7 +279,9 @@ jobs:
 
   build-prod-mac:
     name: Build Prod - AI-mac
-    if: github.ref == 'refs/heads/main'
+    if: |
+      github.event_name == 'workflow_dispatch' &&
+      github.event.inputs.target_test == 'mac-prod'
     runs-on: ubuntu-latest
     defaults:
       run:
