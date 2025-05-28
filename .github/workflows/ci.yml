@@ -139,7 +139,7 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: .
-          file: Dockerfile-ai-kellyn
+          file: Dockerfile
           push: true
           tags: jchanho99/ai-image-dev:latest
           cache-from: type=gha,scope=build-ai-kellyn
@@ -285,7 +285,7 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           context: .
-          file: Dockerfile-ai-mac
+          file: Dockerfile
           push: true
           tags: jchanho99/ai-text-prod:latest
           cache-from: type=gha,scope=build-ai-mac
