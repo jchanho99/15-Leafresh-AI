@@ -39,7 +39,7 @@ jobs:
       run:
         working-directory: ./Image
     env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      GOOGLE_CREDENTIAL_JSON_B64: ${{ secrets.GOOGLE_CREDENTIAL_JSON_B64 }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup Pyton
@@ -56,9 +56,10 @@ jobs:
           source .env
           set +a
       
-      - name: Write credentials.json safely (using printf)
+      - name: Decode credentials.json from base64
         run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
+          echo "$GOOGLE_CREDENTIAL_JSON_B64" | base64 -d > credentials.json
+          jq . credentials.json > /dev/null  # JSON 유효성 검증
 
       - name: Check contents of credentials.json
         run: cat credentials.json
@@ -193,7 +194,7 @@ jobs:
       run:
         working-directory: ./Text/LLM
     env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+      GOOGLE_CREDENTIAL_JSON_B64: ${{ secrets.GOOGLE_CREDENTIAL_JSON_B64 }}
     
     steps:
       - uses: actions/checkout@v3
@@ -211,9 +212,10 @@ jobs:
           source .env
           set +a
       
-      - name: Write credentials.json safely (using printf)
+      - name: Decode credentials.json from base64
         run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
+          echo "$GOOGLE_CREDENTIAL_JSON_B64" | base64 -d > credentials.json
+          jq . credentials.json > /dev/null  # JSON 유효성 검증
 
       - name: Check contents of credentials.json
         run: cat credentials.json
