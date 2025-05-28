@@ -51,16 +51,34 @@ jobs:
   # ✅ KELLYN - Integration Test
   integration-test-kellyn:
     name: Integration Test - AI-kellyn
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn-prod'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./Image
     steps:
       - uses: actions/checkout@v3
-      - run: |
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Uvicorn in Background
+        run: |
+          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload > uvicorn.log 2>&1 &
+          sleep 5
+
+      - name: Run Integration Test Script
+        run: |
           chmod +x verify_curl_test.sh
           ./verify_curl_test.sh
+
+      - name: Stop Uvicorn
+        run: pkill -f "uvicorn"
 
   # ✅ KELLYN - Build Dev
   build-dev-kellyn:
@@ -138,16 +156,34 @@ jobs:
   # ✅ MAC - Integration Test
   integration-test-mac:
     name: Integration Test - AI-mac
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac-prod'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Text/LLM
+        working-directory: ./Text
     steps:
       - uses: actions/checkout@v3
-      - run: |
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Uvicorn in Background
+        run: |
+          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload > uvicorn.log 2>&1 &
+          sleep 5
+
+      - name: Run Integration Test Script
+        run: |
           chmod +x censorship_curl_test.sh
           ./censorship_curl_test.sh
+
+      - name: Stop Uvicorn
+        run: pkill -f "uvicorn"
 
   # ✅ MAC - Build Dev
   build-dev-mac:
