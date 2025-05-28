@@ -279,6 +279,7 @@ jobs:
 
   build-prod-mac:
     name: Build Prod - AI-mac
+    needs: integration-test-mac
     if: |
       github.event_name == 'workflow_dispatch' &&
       github.event.inputs.target_test == 'mac-prod'
