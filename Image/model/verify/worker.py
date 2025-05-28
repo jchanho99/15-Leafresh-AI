@@ -22,6 +22,7 @@ subscriber = pubsub_v1.SubscriberClient()
 verifier = ImageVerifyModel()
 sender = SSESender()
 
+
 def run_worker():
     def callback(message):
         print("callback 메시지 수신됨", message)
