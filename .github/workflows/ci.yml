@@ -115,7 +115,7 @@ jobs:
       - name: Run Uvicorn in Background with --env-file
         run: |
           nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload --env-file .env > uvicorn.log 2>&1 &
-          sleep 5
+          sleep 30
 
       - name: Run Integration Test Script
         run: |
@@ -230,7 +230,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./Text
+        working-directory: ./Text/LLM
     steps:
       - uses: actions/checkout@v3
 
@@ -264,7 +264,7 @@ jobs:
       - name: Run Uvicorn in Background with --env-file
         run: |
           nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload --env-file .env > uvicorn.log 2>&1 &
-          sleep 5
+          sleep 30
 
       - name: Run Integration Test Script
         run: |
