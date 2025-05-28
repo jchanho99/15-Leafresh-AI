@@ -1,5 +1,5 @@
 name: AI Project CI
- 
+
 on:
   push:
     branches:
@@ -14,7 +14,7 @@ on:
       - develop
       - main
     paths:
-      - '.github/workflows/**'  # CI 파일 위치 포함
+      - '.github/workflows/**'
   
   workflow_dispatch:
     inputs:
@@ -30,7 +30,6 @@ on:
 
 jobs:
 
-  # ✅ KELLYN - Unit Test
   unit-test-kellyn:
     name: Unit Test - AI-kellyn
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn-dev'
@@ -40,40 +39,36 @@ jobs:
         working-directory: ./Image
     env:
       GOOGLE_CREDENTIAL_JSON_B64: ${{ secrets.GOOGLE_CREDENTIAL_JSON_B64 }}
+      ENV_LOCAL: ${{ secrets.ENV_LOCAL }}
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Pyton
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-          
+
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
-             
+
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
-      
+
       - name: Decode credentials.json from base64
         run: |
           echo "$GOOGLE_CREDENTIAL_JSON_B64" | base64 -d > credentials.json
-          jq . credentials.json > /dev/null  # JSON 유효성 검증
-
-      - name: Check contents of credentials.json
-        run: cat credentials.json
+          jq . credentials.json > /dev/null
 
       - name: Set GOOGLE_APPLICATION_CREDENTIALS
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
-      
+
       - name: Install Dependencies
         run: pip install -r requirements.txt
-      
+
       - name: Run Unit Test
         run: python verify_unit_test.py
 
-  # ✅ KELLYN - Integration Test
   integration-test-kellyn:
     name: Integration Test - AI-kellyn
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn-prod'
@@ -82,30 +77,27 @@ jobs:
       run:
         working-directory: ./Image
     env:
-      ENV_FILE: ${{ secrets.ENV_FILE }}
+      GOOGLE_CREDENTIAL_JSON_B64: ${{ secrets.GOOGLE_CREDENTIAL_JSON_B64 }}
+      ENV_LOCAL: ${{ secrets.ENV_LOCAL }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
 
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
-             
+
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
-      
-      - name: Write credentials.json safely (using printf)
-        run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
 
-      - name: Check contents of credentials.json
-        run: cat credentials.json
+      - name: Decode credentials.json from base64
+        run: |
+          echo "$GOOGLE_CREDENTIAL_JSON_B64" | base64 -d > credentials.json
+          jq . credentials.json > /dev/null
 
       - name: Set GOOGLE_APPLICATION_CREDENTIALS
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
@@ -113,7 +105,7 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Uvicorn in Background with --env-file
+      - name: Run Uvicorn in Background
         run: |
           nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload --env-file .env > uvicorn.log 2>&1 &
           sleep 30
@@ -122,7 +114,7 @@ jobs:
         run: |
           chmod +x verify_curl_test.sh
           ./verify_curl_test.sh
-      
+
       - name: Check Uvicorn Log
         if: failure()
         run: cat uvicorn.log
@@ -130,7 +122,6 @@ jobs:
       - name: Stop Uvicorn
         run: pkill -f "uvicorn"
 
-  # ✅ KELLYN - Build Dev
   build-dev-kellyn:
     name: Build Dev - AI-kellyn
     if: github.ref == 'refs/heads/develop'
@@ -144,11 +135,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and Push
-        uses: docker/build-push-action@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-kellyn
@@ -157,7 +145,6 @@ jobs:
           cache-from: type=gha,scope=build-ai-kellyn
           cache-to: type=gha,mode=max,scope=build-ai-kellyn
 
-  # ✅ KELLYN - Build Prod
   build-prod-kellyn:
     name: Build Prod - AI-kellyn
     if: github.ref == 'refs/heads/main'
@@ -171,11 +158,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and Push
-        uses: docker/build-push-action@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-kellyn
@@ -184,8 +168,6 @@ jobs:
           cache-from: type=gha,scope=build-ai-kellyn
           cache-to: type=gha,mode=max,scope=build-ai-kellyn
 
-
-  # ✅ MAC - Unit Test
   unit-test-mac:
     name: Unit Test - AI-mac
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac-dev'
@@ -195,41 +177,30 @@ jobs:
         working-directory: ./Text/LLM
     env:
       GOOGLE_CREDENTIAL_JSON_B64: ${{ secrets.GOOGLE_CREDENTIAL_JSON_B64 }}
-    
+      ENV_LOCAL: ${{ secrets.ENV_LOCAL }}
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Pyton
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-          
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
-             
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
-      
       - name: Decode credentials.json from base64
         run: |
           echo "$GOOGLE_CREDENTIAL_JSON_B64" | base64 -d > credentials.json
-          jq . credentials.json > /dev/null  # JSON 유효성 검증
-
-      - name: Check contents of credentials.json
-        run: cat credentials.json
-
+          jq . credentials.json > /dev/null
       - name: Set GOOGLE_APPLICATION_CREDENTIALS
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
-      
       - name: Install Dependencies
         run: pip install -r requirements.txt
-      
       - name: Run Unit Test
         run: python censorship_unit_test.py
 
-  # ✅ MAC - Integration Test
   integration-test-mac:
     name: Integration Test - AI-mac
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac-prod'
@@ -237,54 +208,43 @@ jobs:
     defaults:
       run:
         working-directory: ./Text/LLM
+    env:
+      GOOGLE_CREDENTIAL_JSON_B64: ${{ secrets.GOOGLE_CREDENTIAL_JSON_B64 }}
+      ENV_LOCAL: ${{ secrets.ENV_LOCAL }}
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
-             
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
-      
-      - name: Write credentials.json safely (using printf)
+      - name: Decode credentials.json from base64
         run: |
-          echo "$GOOGLE_APPLICATION_CREDENTIALS" | jq . > credentials.json
-
-      - name: Check contents of credentials.json
-        run: cat credentials.json
-
+          echo "$GOOGLE_CREDENTIAL_JSON_B64" | base64 -d > credentials.json
+          jq . credentials.json > /dev/null
       - name: Set GOOGLE_APPLICATION_CREDENTIALS
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
-      
       - name: Install Dependencies
         run: pip install -r requirements.txt
-
-      - name: Run Uvicorn in Background with --env-file
+      - name: Run Uvicorn in Background
         run: |
           nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload --env-file .env > uvicorn.log 2>&1 &
           sleep 30
-
       - name: Run Integration Test Script
         run: |
           chmod +x censorship_curl_test.sh
           ./censorship_curl_test.sh
-      
       - name: Check Uvicorn Log
         if: failure()
         run: cat uvicorn.log
-      
       - name: Stop Uvicorn
         run: pkill -f "uvicorn"
 
-  # ✅ MAC - Build Dev
   build-dev-mac:
     name: Build Dev - AI-mac
     if: github.ref == 'refs/heads/develop'
@@ -298,11 +258,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and Push
-        uses: docker/build-push-action@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-mac
@@ -311,8 +268,6 @@ jobs:
           cache-from: type=gha,scope=build-ai-mac
           cache-to: type=gha,mode=max,scope=build-ai-mac
 
-
-  # ✅ MAC - Build Prod
   build-prod-mac:
     name: Build Prod - AI-mac
     if: github.ref == 'refs/heads/main'
@@ -326,11 +281,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and Push
-        uses: docker/build-push-action@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile-ai-mac
@@ -338,4 +290,3 @@ jobs:
           tags: jchanho99/ai-text-prod:latest
           cache-from: type=gha,scope=build-ai-mac
           cache-to: type=gha,mode=max,scope=build-ai-mac
-
