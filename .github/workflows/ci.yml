@@ -46,6 +46,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
+          
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
              
@@ -74,7 +75,7 @@ jobs:
   # ✅ KELLYN - Integration Test
   integration-test-kellyn:
     name: Integration Test - AI-kellyn
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'kellyn-prod'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -90,7 +91,23 @@ jobs:
           python-version: "3.12"
 
       - name: Write .env file
-        run: echo "$ENV_FILE" > .env
+        run: echo "$ENV_LOCAL" > .env
+             
+      - name: Load .env variables
+        run: |
+          set -a
+          source .env
+          set +a
+      
+      - name: Write credentials.json safely (using printf)
+        run: |
+          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+
+      - name: Check contents of credentials.json
+        run: cat credentials.json
+
+      - name: Set GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
@@ -180,17 +197,22 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
+          
       - name: Write .env file
         run: echo "$ENV_LOCAL" > .env
-      
+             
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
       
-      - name: Write service account key to file
-        run: echo "$GOOGLE_APPLICATION_CREDENTIALS" > credentials.json
+      - name: Write credentials.json safely (using printf)
+        run: |
+          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+
+      - name: Check contents of credentials.json
+        run: cat credentials.json
 
       - name: Set GOOGLE_APPLICATION_CREDENTIALS
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
@@ -204,7 +226,7 @@ jobs:
   # ✅ MAC - Integration Test
   integration-test-mac:
     name: Integration Test - AI-mac
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_test == 'mac-prod'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -218,13 +240,23 @@ jobs:
           python-version: "3.12"
       
       - name: Write .env file
-        run: echo "$ENV_FILE" > .env
-
+        run: echo "$ENV_LOCAL" > .env
+             
       - name: Load .env variables
         run: |
           set -a
           source .env
           set +a
+      
+      - name: Write credentials.json safely (using printf)
+        run: |
+          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+
+      - name: Check contents of credentials.json
+        run: cat credentials.json
+
+      - name: Set GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
       
       - name: Install Dependencies
         run: pip install -r requirements.txt
