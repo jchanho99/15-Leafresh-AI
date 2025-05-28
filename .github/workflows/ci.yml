@@ -55,8 +55,12 @@ jobs:
           source .env
           set +a
       
-      - name: Write service account key to file
-        run: echo "$GOOGLE_APPLICATION_CREDENTIALS" > credentials.json
+      - name: Write credentials.json safely (using printf)
+        run: |
+          echo "$GOOGLE_CREDENTIAL_JSON" | jq . > credentials.json
+
+      - name: Check contents of credentials.json
+        run: cat credentials.json
 
       - name: Set GOOGLE_APPLICATION_CREDENTIALS
         run: echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/credentials.json" >> $GITHUB_ENV
