@@ -57,7 +57,7 @@ def run_worker():
                 "result": is_verified
             })
             '''
-
+            
             result_payload = {
                 "type": data["type"],
                 "memberId": data["memberId"],
@@ -65,9 +65,9 @@ def run_worker():
                 "date": data["date"],
                 "result": is_verified
             }
-
+            
             # SSE 방식으로 결과 전송
-            asyncio.run(sender.send(data["verificationId"], result_payload))
+            asyncio.run(sender.send(int(data["verificationId"]), result_payload))
 
             message.ack()
 

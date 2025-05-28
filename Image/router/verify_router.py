@@ -59,7 +59,7 @@ class CallbackResult(BaseModel):
     date: str
     result: bool
 
-@router.post("/api/verifications/{verificationId}/result")
+@router.post("/api/verifications/{verificationId}/result/stream")
 async def receive_result(verificationId: int, data: CallbackResult):
     print(f"콜백 수신 완료: {data}")
     return JSONResponse(
