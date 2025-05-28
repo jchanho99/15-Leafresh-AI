@@ -44,7 +44,15 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
+      - name: Write .env file
+        run: echo "$ENV_FILE" > .env
 
+      - name: Load .env variables
+        run: |
+          set -a
+          source .env
+          set +a
+      
       - name: Install Dependencies
         run: pip install -r requirements.txt
       
@@ -59,6 +67,8 @@ jobs:
     defaults:
       run:
         working-directory: ./Image
+    env:
+      ENV_FILE: ${{ secrets.ENV_FILE }}
     steps:
       - uses: actions/checkout@v3
 
@@ -67,12 +77,15 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Write .env file
+        run: echo "$ENV_FILE" > .env
+
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Uvicorn in Background
+      - name: Run Uvicorn in Background with --env-file
         run: |
-          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload > uvicorn.log 2>&1 &
+          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload --env-file .env > uvicorn.log 2>&1 &
           sleep 5
 
       - name: Run Integration Test Script
@@ -152,7 +165,15 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
+      - name: Write .env file
+        run: echo "$ENV_FILE" > .env
 
+      - name: Load .env variables
+        run: |
+          set -a
+          source .env
+          set +a
+          
       - name: Install Dependencies
         run: pip install -r requirements.txt
       
@@ -174,13 +195,22 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.12"
+      
+      - name: Write .env file
+        run: echo "$ENV_FILE" > .env
 
+      - name: Load .env variables
+        run: |
+          set -a
+          source .env
+          set +a
+      
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Uvicorn in Background
+      - name: Run Uvicorn in Background with --env-file
         run: |
-          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload > uvicorn.log 2>&1 &
+          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload --env-file .env > uvicorn.log 2>&1 &
           sleep 5
 
       - name: Run Integration Test Script
