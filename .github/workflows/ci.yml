@@ -40,13 +40,16 @@ jobs:
         working-directory: ./Image
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Setup Pyton
+        uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: |
-          pip install pytest
-          pytest ./tests
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      
+      - name: Run Unit Test
+        run: python verify_unit_test.py
 
   # ✅ KELLYN - Integration Test
   integration-test-kellyn:
@@ -145,13 +148,16 @@ jobs:
         working-directory: ./Text/LLM
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Setup Pyton
+        uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - run: |
-          pip install pytest
-          pytest ./tests
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      
+      - name: Run Unit Test
+        run: python censorship_unit_test.py
 
   # ✅ MAC - Integration Test
   integration-test-mac:
