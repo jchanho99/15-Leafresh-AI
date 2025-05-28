@@ -1,5 +1,5 @@
 ### 챌린지 이미지 인증 요청 테스트 (FastAPI)
-POST http://localhost:7000/ai/image/verification
+POST http://localhost:7000/ai/image/verification/stream
 Content-Type: application/json
 
 {
@@ -11,3 +11,4 @@ Content-Type: application/json
   "date": "2025-05-24",
   "challengeName": "SNS에 습지 보호 캠페인 알리기"
 }
+

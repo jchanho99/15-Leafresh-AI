@@ -1,27 +1,33 @@
 from google.cloud import pubsub_v1
 from model.verify.LLM_verify_model import ImageVerifyModel
 import json
-import requests
 
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+# import requests
+# SSE 통신
+import asyncio
+from .sse_sender import SSESender
 
-project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
+load_dotenv()
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_PUBSUB")
+
+project_id = os.getenv("GOOGLE_CLOUD_PROJECT_PUBSUB")
 subscription_id = os.getenv("PUBSUB_SUBSCRIPTION")
 
 subscription_path = f"projects/{project_id}/subscriptions/{subscription_id}"
 
 subscriber = pubsub_v1.SubscriberClient()
 verifier = ImageVerifyModel()
+sender = SSESender()
 
 def run_worker():
     def callback(message):
         print("callback 메시지 수신됨", message)
         try:
             data = json.loads(message.data.decode("utf-8"))
+
             blob_name = data["imageUrl"].split("/")[-1]
             challenge_type = data["type"]
             challenge_id = int(data["challengeId"])
@@ -38,9 +44,9 @@ def run_worker():
 
             # 콜백 URL 내 challengeId 치환
             # -> CALLBACK_URL에 {verificationId}가 포함되는 경우, Python에서 실제 전송 전에 .format() 또는 f-string으로 치환해줘야함 
-            formatted_url = os.getenv("CALLBACK_URL").format(verificationId=data["verificationId"])
+            # formatted_url = os.getenv("CALLBACK_URL").format(verificationId=data["verificationId"])
 
-
+            '''
             # 결과 콜백 전송
             requests.post(formatted_url, json={
                 "type": data["type"],
@@ -49,6 +55,18 @@ def run_worker():
                 "date": data["date"],
                 "result": is_verified
             })
+            '''
+
+            result_payload = {
+                "type": data["type"],
+                "memberId": data["memberId"],
+                "challengeId": data["challengeId"],
+                "date": data["date"],
+                "result": is_verified
+            }
+
+            # SSE 방식으로 결과 전송
+            asyncio.run(sender(data["verificationId"], result_payload))
 
             message.ack()
 
