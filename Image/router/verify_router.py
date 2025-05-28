@@ -1,3 +1,4 @@
+import httpx
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -25,7 +26,7 @@ class ImageVerificationResponse(BaseModel):
     message: str
     data: Optional[dict] = None
 
-@router.post("/ai/image/verification", response_model=ImageVerificationResponse, status_code=202)
+@router.post("/ai/image/verification/stream", response_model=ImageVerificationResponse, status_code=202)
 async def verify_image(req: ImageVerificationRequest):
     try:
         data = req.model_dump()         # req.dict() -> req.model_dump()
