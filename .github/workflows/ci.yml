@@ -45,7 +45,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Write .env file
-        run: echo "$ENV_FILE" > .env
+        run: echo "$ENV_LOCAL" > .env
 
       - name: Load .env variables
         run: |
@@ -166,7 +166,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Write .env file
-        run: echo "$ENV_FILE" > .env
+        run: echo "$ENV_LOCAL" > .env
 
       - name: Load .env variables
         run: |
