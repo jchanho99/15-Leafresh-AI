@@ -138,7 +138,7 @@ jobs:
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./Image
           file: ./Image/Dockerfile
           push: true
           tags: jchanho99/ai-image-dev:latest
@@ -161,7 +161,7 @@ jobs:
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./Image
           file: ./Image/Dockerfile
           push: true
           tags: jchanho99/ai-image-prod:latest
@@ -261,7 +261,7 @@ jobs:
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./Text
           file: ./Text/LLM/Dockerfile
           push: true
           tags: jchanho99/ai-text-dev:latest
@@ -284,7 +284,7 @@ jobs:
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./Text
           file: ./Text/LLM/Dockerfile
           push: true
           tags: jchanho99/ai-text-prod:latest
