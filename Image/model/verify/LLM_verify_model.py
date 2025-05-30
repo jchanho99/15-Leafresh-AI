@@ -14,7 +14,7 @@ import tempfile                     # 임시 파일 저장용
 # LangChain 적용
 from langchain_google_vertexai import VertexAI
 from model.verify.event_challenge_prompt import event_challenge_prompts
-
+from model.verify.group_prompt_generator import generate_group_prompt
 
 class ImageVerifyModel :
     def __init__(self, credential_env="GOOGLE_APPLICATION_CREDENTIALS", project_id="leafresh", region="us-central1"): 
@@ -53,20 +53,25 @@ class ImageVerifyModel :
             return f"[에러] GCS 이미지 로드 실패: {e}" 
 
 
-    def select_prompt(self, challenge_type: str, challenge_id: int):
-        if challenge_type.upper() == "GROUP" and 1 <= challenge_id <= 17:
-            return event_challenge_prompts.get(challenge_id)
+    def select_prompt(self, challenge_type: str, challenge_id: int, challenge_name: str):
+        if challenge_type.upper() == "GROUP" :
+            if 1 <= challenge_id <= 17:
+                return event_challenge_prompts.get(challenge_id)
+            else: 
+                return generate_group_prompt(challenge_name)
+            
         return None
 
     def response(self, image, challenge_type, challenge_id, challenge_name):
-        prompt_template = self.select_prompt(challenge_type, challenge_id)
+        prompt_template = self.select_prompt(challenge_type, challenge_id, challenge_name)
 
-        if prompt_template:
-            # LangChain 방식 (이벤트 챌린지)
-            # llm = VertexAI(model_name="gemini-2.0-flash")
-            # chain = prompt_template | llm
-            # return chain.invoke({"image": image})
+        # LangChain PromptTemplate 객체인 경우 
+        if hasattr(prompt_template, "format_prompt"):
             prompt = prompt_template.format_prompt().to_string()
+        # 단체 챌린지에서 직접 생성한 string의 경우 
+        elif isinstance(prompt_template, str):
+            prompt = prompt_template
+        # 기본 단일 프롬프트 
         else:
             prompt = (
                 f"이 이미지는 '{challenge_name}'에 적합한 이미지 인가요? \n"
