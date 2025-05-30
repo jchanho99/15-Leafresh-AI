@@ -13,9 +13,9 @@ class FeedbackModel:
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
         init(project=os.getenv("GOOGLE_CLOUD_PROJECT"), location=os.getenv("VERTEX_AI_LOCATION"))
         self.model = GenerativeModel(os.getenv("VERTEX_MODEL_NAME"))
-        # 한글 기준으로 2-3문장에 적절한 토큰 수 설정 (약 100-150자)
-        self.max_tokens = 100
-        # 프롬프트 템플릿을 환경 변수에서 가져옴
+        # 한글 기준으로 4-5문장에 적절한 토큰 수로 조정 (약 200-250자)
+        self.max_tokens = 200
+        # 프롬프트 템플릿을 환경 변수에서 가져오거나 기본값 사용
         self.prompt_template = os.getenv("FEEDBACK_PROMPT_TEMPLATE", """
         다음은 사용자의 챌린지 참여 기록입니다. 이를 바탕으로 긍정적이고 격려하는 피드백을 생성해주세요.
 
@@ -79,24 +79,22 @@ class FeedbackModel:
             )
         return "\n".join(formatted) if formatted else "최근 일주일 동안 참여한 단체 챌린지가 없습니다."
 
-    async def generate_feedback(self, data: Dict[str, Any]) -> AsyncIterator[Dict[str, Any]]:
+    async def generate_feedback(self, data: Dict[str, Any]) -> Dict[str, Any]:
         try:
             # 입력 데이터 검증
-            if not data.get("memberId"):
-                yield {
+            if data.get("memberId") is None:  # 0도 유효한 값으로 처리
+                return {
                     "status": 400,
                     "message": "memberId는 필수 항목입니다.",
                     "data": None
                 }
-                return
             
             if not data.get("personalChallenges") and not data.get("groupChallenges"):
-                yield {
+                return {
                     "status": 400,
                     "message": "최소 1개의 챌린지 데이터가 필요합니다.",
                     "data": None
                 }
-                return
 
             # 챌린지 데이터 포맷팅
             personal_challenges = self._format_personal_challenges(data.get("personalChallenges", []))
@@ -109,7 +107,7 @@ class FeedbackModel:
             )
 
             try:
-                # Vertex AI를 통한 피드백 생성 (스트리밍 방식 사용)
+                # Vertex AI를 통한 피드백 생성 (스트리밍 방식 사용 -> 비스트리밍으로 변경)
                 response = self.model.generate_content(
                     prompt,
                     generation_config={
@@ -117,29 +115,22 @@ class FeedbackModel:
                         "top_p": 1,
                         "top_k": 32,
                         "max_output_tokens": self.max_tokens
-                    },
-                    stream=True
+                    }
                 )
-                
-                full_feedback = ""
-                # 동기 제너레이터를 비동기적으로 처리
-                for chunk in response:
-                    if chunk.candidates and chunk.candidates[0].content.parts:
-                        chunk_text = chunk.candidates[0].content.parts[0].text
-                        if chunk_text.strip():
-                            full_feedback += chunk_text
-                            yield {
-                                "status": 200,
-                                "message": "피드백 생성 중",
-                                "data": {
-                                    "feedback": chunk_text
-                                }
-                            }
-                    # 다른 작업이 실행될 수 있도록 잠시 양보
-                    await asyncio.sleep(0)
 
-                # 최종 피드백 저장 요청을 위한 응답
-                yield {
+                # Access the full text directly from the non-streaming response
+                full_feedback = ""
+                if response.candidates and response.candidates[0].content.parts:
+                     full_feedback = response.candidates[0].content.parts[0].text
+
+                if not full_feedback.strip():
+                    return {
+                        "status": 500,
+                        "message": "서버 오류로 피드백 생성을 완료하지 못했습니다. 잠시 후 다시 시도해주세요.",
+                        "data": None
+                    }
+
+                return {
                     "status": 200,
                     "message": "피드백 결과 수신 완료",
                     "data": {
@@ -150,17 +141,17 @@ class FeedbackModel:
             except Exception as model_error:
                 error_trace = traceback.format_exc()
                 print(f"Model Error: {str(model_error)}\nTrace: {error_trace}")
-                yield {
+                return {
                     "status": 500,
-                    "message": f"서버 오류로 피드백 결과 저장 실패. 잠시 후 다시 시도해주세요. AI 모델 오류: {str(model_error)}",
+                    "message": "서버 오류로 피드백 결과 저장에 실패했습니다. 잠시 후 다시 시도해주세요.",
                     "data": None
                 }
 
         except Exception as e:
             error_trace = traceback.format_exc()
             print(f"General Error: {str(e)}\nTrace: {error_trace}")
-            yield {
+            return {
                 "status": 500,
-                "message": f"서버 오류로 피드백 결과 저장 실패. 잠시 후 다시 시도해주세요. AI 모델 오류: {str(model_error)}",
+                "message": "서버 오류로 피드백 결과 저장에 실패했습니다. 잠시 후 다시 시도해주세요.",
                 "data": None
             } 

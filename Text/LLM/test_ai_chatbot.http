@@ -17,5 +17,5 @@ Content-Type: application/json
 
 {
   "sessionId": "user123",
-  "message": "더 귀엽게 설명"
+  "message": "더 자세하게 추천"
 }
