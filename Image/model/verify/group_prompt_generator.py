@@ -1,4 +1,5 @@
 from vertexai.preview.generative_models import GenerativeModel
+from model.verify.mongodb import insert_prompt, get_prompt_by_id, prompt_exists
 
 def generate_group_prompt(challenge_name: str, challenge_info: str) -> str:      
     model = GenerativeModel("gemini-2.0-flash")
@@ -23,3 +24,13 @@ def generate_group_prompt(challenge_name: str, challenge_info: str) -> str:
 
     return response.text
     
+# 프롬프트가 없으면 생성 후 저장, 있으면 불러오기
+def get_or_create_group_prompt(challenge_id: int, challenge_name: str, challenge_info: str) -> str:
+    if prompt_exists(challenge_id):
+        return get_prompt_by_id(challenge_id)
+    
+    prompt_text = generate_group_prompt(challenge_name, challenge_info)
+    insert_prompt(challenge_id, challenge_name, prompt_text)
+
+    return prompt_text
+

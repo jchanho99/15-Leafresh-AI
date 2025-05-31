@@ -13,7 +13,7 @@ import tempfile                     # 임시 파일 저장용
 
 # LangChain PromptTemplate 적용
 from model.verify.event_challenge_prompt import event_challenge_prompts
-from model.verify.group_prompt_generator import generate_group_prompt
+from model.verify.group_prompt_generator import get_or_create_group_prompt
 from model.verify.personal_challenge_prompt import personal_challenge_prompts
 
 class ImageVerifyModel :
@@ -58,7 +58,7 @@ class ImageVerifyModel :
             if 1 <= challenge_id <= 17:
                 return event_challenge_prompts.get(challenge_id)
             else: 
-                return generate_group_prompt(challenge_name, challenge_info)
+                return get_or_create_group_prompt(challenge_id, challenge_name, challenge_info)
         elif challenge_type.upper() == "PERSONAL" :
             return personal_challenge_prompts.get(challenge_id)
             

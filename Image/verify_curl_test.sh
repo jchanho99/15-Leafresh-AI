@@ -8,5 +8,6 @@ curl -X POST http://localhost:8000/ai/image/verification \
     "memberId": 112,
     "challengeId": 1,
     "date": "2025-05-24",
-    "challengeName": "SNS에 습지 보호 캠페인 알리기"
+    "challengeName": "SNS에 습지 보호 캠페인 알리기",
+    "challengeInfo": ""
   }'
