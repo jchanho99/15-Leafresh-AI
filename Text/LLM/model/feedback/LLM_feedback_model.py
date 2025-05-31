@@ -4,7 +4,6 @@ from vertexai import init
 from vertexai.preview.generative_models import GenerativeModel
 from dotenv import load_dotenv
 import os
-import asyncio
 import traceback
 
 class FeedbackModel:
@@ -121,7 +120,7 @@ class FeedbackModel:
                 # Access the full text directly from the non-streaming response
                 full_feedback = ""
                 if response.candidates and response.candidates[0].content.parts:
-                     full_feedback = response.candidates[0].content.parts[0].text
+                    full_feedback = response.candidates[0].content.parts[0].text
 
                 if not full_feedback.strip():
                     return {
@@ -154,4 +153,4 @@ class FeedbackModel:
                 "status": 500,
                 "message": "서버 오류로 피드백 결과 저장에 실패했습니다. 잠시 후 다시 시도해주세요.",
                 "data": None
-            } 
+            }
