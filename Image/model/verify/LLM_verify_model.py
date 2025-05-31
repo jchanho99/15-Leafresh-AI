@@ -11,10 +11,10 @@ from vertexai.preview.generative_models import Image as VertexImage
 from google.cloud import storage  
 import tempfile                     # 임시 파일 저장용
 
-# LangChain 적용
-from langchain_google_vertexai import VertexAI
+# LangChain PromptTemplate 적용
 from model.verify.event_challenge_prompt import event_challenge_prompts
 from model.verify.group_prompt_generator import generate_group_prompt
+from model.verify.personal_challenge_prompt import personal_challenge_prompts
 
 class ImageVerifyModel :
     def __init__(self, credential_env="GOOGLE_APPLICATION_CREDENTIALS", project_id="leafresh", region="us-central1"): 
@@ -26,7 +26,7 @@ class ImageVerifyModel :
         self.storage_client = storage.Client()                                          # GCS 클라이언트 
 
 
-    def image_verify(self, bucket_name: str, blob_name: str, challenge_type: str, challenge_id: int, challenge_name: str) -> str :
+    def image_verify(self, bucket_name: str, blob_name: str, challenge_type: str, challenge_id: int, challenge_name: str, challenge_info: str) -> str :
         try:
             bucket = self.storage_client.bucket(bucket_name)                            # 이미지 업로드 
             blob = bucket.blob(blob_name)                                 
@@ -47,23 +47,25 @@ class ImageVerifyModel :
                 image = VertexImage.load_from_file(temp_file.name)
                 # image = Image.load_from_file(temp_file.name)
 
-            return self.response(image, challenge_type, challenge_id, challenge_name)
+            return self.response(image, challenge_type, challenge_id, challenge_name, challenge_info)
 
         except Exception as e:
             return f"[에러] GCS 이미지 로드 실패: {e}" 
 
 
-    def select_prompt(self, challenge_type: str, challenge_id: int, challenge_name: str):
+    def select_prompt(self, challenge_type: str, challenge_id: int, challenge_name: str, challenge_info: str):
         if challenge_type.upper() == "GROUP" :
             if 1 <= challenge_id <= 17:
                 return event_challenge_prompts.get(challenge_id)
             else: 
-                return generate_group_prompt(challenge_name)
+                return generate_group_prompt(challenge_name, challenge_info)
+        elif challenge_type.upper() == "PERSONAL" :
+            return personal_challenge_prompts.get(challenge_id)
             
         return None
 
-    def response(self, image, challenge_type, challenge_id, challenge_name):
-        prompt_template = self.select_prompt(challenge_type, challenge_id, challenge_name)
+    def response(self, image, challenge_type, challenge_id, challenge_name, challenge_info):
+        prompt_template = self.select_prompt(challenge_type, challenge_id, challenge_name, challenge_info)
 
         # LangChain PromptTemplate 객체인 경우 
         if hasattr(prompt_template, "format_prompt"):
