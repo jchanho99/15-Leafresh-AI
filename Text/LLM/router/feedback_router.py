@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, BackgroundTasks, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from pydantic import BaseModel, Field
+from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY, HTTP_202_ACCEPTED, HTTP_500_INTERNAL_SERVER_ERROR
+from pydantic import BaseModel
 from typing import List, Dict, Any
-from datetime import datetime
 
 # Adjust the import based on your actual file structure
 from ..model.feedback.LLM_feedback_model import FeedbackModel
@@ -33,41 +33,14 @@ class GroupChallenge(BaseModel):
     submissions: List[Submission] = [] 
 
 class FeedbackRequest(BaseModel):
-    memberId: int # Changed to int based on API spec example
-    personalChallenges: List[PersonalChallenge] | None = None # Made optional based on spec
-    groupChallenges: List[GroupChallenge] | None = None # Made optional based on spec
-
-# 예외 핸들러 함수들
-async def feedback_exception_handler(request: Request, exc: RequestValidationError):
-    print(f"Validation Error: {exc.errors()}")  # 에러 상세 내용 출력
-    return JSONResponse(
-        status_code=400,
-        content={
-            "status": 400,
-            "message": "요청 값이 유효하지 않습니다. 챌린지 데이터가 모두 포함되어야 합니다.",
-            "data": None
-        }
-    )
-
-async def feedback_http_exception_handler(request: Request, exc: HTTPException):
-    if exc.status_code == 500:
-        message = "서버 오류로 피드백 생성을 완료하지 못했습니다. 잠시 후 다시 시도해주세요."
-    else:
-        message = exc.detail
-
-    return JSONResponse(
-        status_code=exc.status_code,
-        content={
-            "status": exc.status_code,
-            "message": message,
-            "data": None
-        }
-    )
+    memberId: int 
+    personalChallenges: List[PersonalChallenge]  # Optional 제거
+    groupChallenges: List[GroupChallenge]
 
 @router.post("/ai/feedback")
 async def create_feedback(request: FeedbackRequest, background_tasks: BackgroundTasks):
-    # API 명세상 챌린지 데이터가 모두 누락된 경우 400 응답
-    if request.personalChallenges is None and request.groupChallenges is None:
+    # API 명세상 챌린지 데이터가 하나라도 누락된 경우 400 응답
+    if not request.personalChallenges and not request.groupChallenges:
         return JSONResponse(
             status_code=400,
             content={
@@ -117,10 +90,37 @@ async def create_feedback(request: FeedbackRequest, background_tasks: Background
 
     # API 명세에 따른 202 응답
     return JSONResponse(
-        status_code=202,
+        status_code=HTTP_202_ACCEPTED,
         content={
             "status": 202,
             "message": "피드백 요청이 정상적으로 접수되었습니다. 결과는 추후 콜백으로 전송됩니다.",
+            "data": None
+        }
+    )
+
+# 예외 핸들러 함수들
+async def feedback_exception_handler(request: Request, exc: RequestValidationError):
+    print(f"Validation Error: {exc.errors()}")  # 에러 상세 내용 출력
+    return JSONResponse(
+        status_code=HTTP_422_UNPROCESSABLE_ENTITY,
+        content={
+            "status": 422,
+            "message": "필수 항목이 누락되었거나 형식이 잘못되었습니다.",
+            "data": None
+        }
+    )
+
+async def feedback_http_exception_handler(request: Request, exc: HTTPException):
+    if exc.status_code == HTTP_500_INTERNAL_SERVER_ERROR:
+        message = "서버 오류로 피드백 생성을 완료하지 못했습니다. 잠시 후 다시 시도해주세요."
+    else:
+        message = exc.detail
+
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "status": exc.status_code,
+            "message": message,
             "data": None
         }
     )
