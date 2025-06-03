@@ -6,7 +6,7 @@ Content-Type: application/json
   "sessionId": "user123",
   "location": "도시",
   "workType": "사무직",
-  "category": "비건"
+  "category": "제로웨이스트"
 }
 
 ###
@@ -17,5 +17,5 @@ Content-Type: application/json
 
 {
   "sessionId": "user123",
-  "message": "더 자세하게 추천"
+  "message": "아무거나 추천"
 }
