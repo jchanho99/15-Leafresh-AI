@@ -10,7 +10,7 @@ DB_NAME = os.getenv("DB_NAME")
 COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")
 
 # MongoDB 클라이언트 생성
-client = MongoClient(MONGO_URI, tls=True, tlsAllowInvalidCertificates=True, tlsCAFile=certifi.where())
+client = MongoClient(MONGO_URI, tls=True, tlsAllowInvalidCertificates=True, tlsCAFile=certifi.where())  # GCP에 올릴 때는 'tlsAllowInvalidCertificates=True'부분 삭제
 db = client[DB_NAME]
 collection = db[COLLECTION_NAME]
 
