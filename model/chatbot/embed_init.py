@@ -10,6 +10,7 @@ from langchain.schema import Document
 from dotenv import load_dotenv
 import os
 import hashlib
+import time  # time 모듈 추가
 
 load_dotenv()
 
@@ -165,7 +166,7 @@ def search_similar_challenges(query, limit=5):
     try:
         # 검색 파라미터 설정
         search_params = SearchParams(
-            hnsw_ef=128,  # 검색 정확도 향상
+            hnsw_ef=400,  # 검색 정확도 향상
             exact=False   # 근사 검색 사용
         )
         

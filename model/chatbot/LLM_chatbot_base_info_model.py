@@ -65,15 +65,7 @@ def get_llm_response(prompt):
             parsed = base_parser.parse(text)
             if isinstance(parsed.get("challenges"), str):
                 parsed["challenges"] = json.loads(parsed["challenges"])
-
-        return JSONResponse(
-            status_code=200,
-            content={
-                "status": 200,
-                "message": "성공!",
-                "data": parsed
-            }
-        )
+        return parsed
 
     except HTTPException as http_err:
         raise http_err

@@ -29,7 +29,7 @@ vectorstore = Qdrant(
     embeddings=embedding_model
 )
 
-retriever = vectorstore.as_retriever(search_kwargs={"k": 5}) # 사용자 질문으로 부터 가장 유사한 3개 문서 검색
+retriever = vectorstore.as_retriever(search_kwargs={"k": 5}) # 사용자 질문으로 부터 가장 유사한 5개 문서 검색
 
 # RAG 방식 챌린지 추천을 위한 Output Parser 정의
 rag_response_schemas = [

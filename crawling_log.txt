@@ -1,0 +1,933 @@
+환경일보 뉴스를 크롤링하는 중...
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_section_code=S1N3
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: http://www.hkbs.co.kr/news/articleList.html?sc_section_code=S1N3
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_section_code=S1N1&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_sub_section_code=S2N2&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_sub_section_code=S2N5&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_sub_section_code=S2N1&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_section_code=S1N2&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_sub_section_code=S2N78&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_sub_section_code=S2N17&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+환경일보 목록 크롤링 중: https://www.hkbs.co.kr/news/articleList.html?sc_sub_section_code=S2N6&view_type=sm
+  -> 현재 목록 페이지에서 'h4.titles a'로 찾은 잠재적 기사 링크 수: 20
+총 환경일보 기사 상세 페이지 링크 수집 완료: 141
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=717827
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 17
+    - 본문 길이: 839
+    - 기사 크롤링 성공 및 추가: 제28회 바다의 날 기념식 열려...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796909
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 1051
+    - 기사 크롤링 성공 및 추가: ‘아시아미생물은행연맹 총회 및 국제 학술회의’ 개최...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=740642
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 32
+    - 본문 길이: 1825
+    - 기사 크롤링 성공 및 추가: 이·팔 전쟁 100일··· “가자지구 아동 영양실조 우...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=774818
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 34
+    - 본문 길이: 2528
+    - 기사 크롤링 성공 및 추가: 동대문구 A 재개발 현장, TR 인증 없는 투수블록 사...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796837
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 1140
+    - 기사 크롤링 성공 및 추가: 서울시농수산식품공사, 생활용품 기증 행사 마련...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797225
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 850
+    - 기사 크롤링 성공 및 추가: 안성시, 제21대 대통령 선거 앞두고 투표 참여 독려...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=730665
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 1540
+    - 기사 크롤링 성공 및 추가: 수산물 방사능 검사 결과 늦장 공개 논란...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=781869
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 2842
+    - 기사 크롤링 성공 및 추가: 시민 안전 뒷전, 삼락생태공원 시설 보수 방치...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796462
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1054
+    - 기사 크롤링 성공 및 추가: 농림위성 개발 협력 ‘우주 농업 시대’ 연다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796930
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 19
+    - 본문 길이: 1026
+    - 기사 크롤링 성공 및 추가: 한국환경공단, 세계순환경제포럼 참석...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=772503
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1219
+    - 기사 크롤링 성공 및 추가: 의성군 하천공사, 수질오염 및 안전사고 우려...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796711
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 1111
+    - 기사 크롤링 성공 및 추가: 바다의 날 맞아 ‘해양환경 이동교실’ 운영...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=727321
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 2323
+    - 기사 크롤링 성공 및 추가: 독일 뒤셀도르프 ‘A+A 2023’ 10월24일 개막...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796710
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 27
+    - 본문 길이: 1073
+    - 기사 크롤링 성공 및 추가: 고병원성 AI 발생 ‘브라질산 닭고기’ 수입 금지...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796615
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 823
+    - 기사 크롤링 성공 및 추가: 한-호주, 해양디지털 신기술 공동 시연...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796373
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 1346
+    - 기사 크롤링 성공 및 추가: 곤충 특유의 향, ‘뇌 인지기능 영역 활성화’...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=773356
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 1043
+    - 기사 크롤링 성공 및 추가: 국산 둔갑 ‘중국산 김치’ 연간 558개소...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796709
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 1172
+    - 기사 크롤링 성공 및 추가: 세계 벌의 날 맞아 생물다양성 교육 실시...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797031
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 690
+    - 기사 크롤링 성공 및 추가: 가습기살균제 집단 합의 관련 의견 수렴...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797034
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 19
+    - 본문 길이: 971
+    - 기사 크롤링 성공 및 추가: 더 세밀하고 꼼꼼한 날씨 예측 가능...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=744446
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 787
+    - 기사 크롤링 성공 및 추가: 한-쿠바 수교··· 대중남미 외교 중요 전환점...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=707591
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 665
+    - 기사 크롤링 성공 및 추가: “튀르키예‧시리아에 구호의 손길 함께 모아요”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797217
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 899
+    - 기사 크롤링 성공 및 추가: 오산시 ‘오! 해피 장미 빛 축제’ 개막...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=728519
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 855
+    - 기사 크롤링 성공 및 추가: 가야 고분군, 유네스코 세계유산 등재...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=774530
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 27
+    - 본문 길이: 886
+    - 기사 크롤링 성공 및 추가: 기울어진 운동장 ‘의료분쟁’, 대부분 나홀로 소송...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=795161
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 33
+    - 본문 길이: 2227
+    - 기사 크롤링 성공 및 추가: 기후위기 책임 소비자 전가, 자동차 보험약관 ‘무효화’...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=793357
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 30
+    - 본문 길이: 3239
+    - 기사 크롤링 성공 및 추가: 서울 혜화경찰서 주차장 공사장, 폐기물 불법 매립 논란...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=774686
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 1536
+    - 기사 크롤링 성공 및 추가: 조달청 벤처나라, 미인증 리튬배터리 소화기 판매 논란...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=791523
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 795
+    - 기사 크롤링 성공 및 추가: LH 과천주암지구 공사현장 관리 부실...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=790599
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 814
+    - 기사 크롤링 성공 및 추가: 녹색소비자연대, 의료광고 피해 사례 모집...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796707
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 16
+    - 본문 길이: 1000
+    - 기사 크롤링 성공 및 추가: 한국 농촌, 세계인에게 알린다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=777005
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1218
+    - 기사 크롤링 성공 및 추가: ‘미세먼지 바로 알기 숏폼 영상 공모’ 시상...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796574
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 31
+    - 본문 길이: 1485
+    - 기사 크롤링 성공 및 추가: 한국 사회, 기후민주시민 36%··· '기후정부 원한다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=791112
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 6246
+    - 기사 크롤링 성공 및 추가: '마약으로부터 안전한 일상', 식약처 전방위적 대응...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797224
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 36
+    - 본문 길이: 1136
+    - 기사 크롤링 성공 및 추가: 안성시, 2025년 제2호 고향사랑 고액기부 모금액 1...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797241
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 851
+    - 기사 크롤링 성공 및 추가: 한미사이언스, 평택시에 기업 참여 녹색숲 조성 활동...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=773977
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 19
+    - 본문 길이: 1536
+    - 기사 크롤링 성공 및 추가: 적자 누적 지방의료원, 줄도산 위기...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796562
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 1022
+    - 기사 크롤링 성공 및 추가: 여름철 수질오염 원인 ‘비점오염물질’...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797262
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 745
+    - 기사 크롤링 성공 및 추가: “쓰레기 없는 깨끗한 바다를 위하여”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797209
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 26
+    - 본문 길이: 1702
+    - 기사 크롤링 성공 및 추가: 한국농어촌공사, ‘자연재난 대비태세 점검’ 나서...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=774613
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 1281
+    - 기사 크롤링 성공 및 추가: 장기 이식 대기 중 사망자 1.4배 증가...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=771685
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 822
+    - 기사 크롤링 성공 및 추가: 산림청, 한일중 기후위기 공동대응 국장급 회의 참가...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796450
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 39
+    - 본문 길이: 2511
+    - 기사 크롤링 성공 및 추가: “제21대 대통령이 들어야 할 환경의 소리”··· 대한...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797257
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 3055
+    - 기사 크롤링 성공 및 추가: 기후위기 ‘쇼윈도 정치’로 전락한 대선 토론...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=789301
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 26
+    - 본문 길이: 1166
+    - 기사 크롤링 성공 및 추가: 환경단체, ‘한강 리버버스’ 밑 빠진 독상 수여...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797216
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 799
+    - 기사 크롤링 성공 및 추가: 영덕군보건소, 산불 피해 이재민 위한 방역망 강화!...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797227
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 36
+    - 본문 길이: 1035
+    - 기사 크롤링 성공 및 추가: 이천시의회, 6월 2일부터 19일간 제254회 제1차 ...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796700
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1313
+    - 기사 크롤링 성공 및 추가: WWF, 온라인 게임 '꿀벌 서바이벌' 공개...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=788229
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 1759
+    - 기사 크롤링 성공 및 추가: 경북 예천 국도 건설현장, 환경·안전 무시...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=787882
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 5429
+    - 기사 크롤링 성공 및 추가: 농지개량기준 신설에도, 불법 성토 여전...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797030
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 33
+    - 본문 길이: 1320
+    - 기사 크롤링 성공 및 추가: 하수도법 시행규칙 개정··· 많은 비 내려도 물 재이용...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=775709
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 1114
+    - 기사 크롤링 성공 및 추가: “비브로스 똑닥은 의료 민영화 포석”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796923
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 2032
+    - 기사 크롤링 성공 및 추가: 기후변화와 플라스틱 오염··· 바다거북의 위기...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796410
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 2470
+    - 기사 크롤링 성공 및 추가: “환경은 생존 조건, 실질적 권리로 구현해야”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796244
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 1050
+    - 기사 크롤링 성공 및 추가: 농진청, 경북 산불 피해지역 기술 지원...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797239
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 33
+    - 본문 길이: 672
+    - 기사 크롤링 성공 및 추가: 평택시, 2025년 여름방학 ‘대학생 인턴사업’ 참여자...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797135
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 16
+    - 본문 길이: 810
+    - 기사 크롤링 성공 및 추가: ‘향기’로 기억되는 숲의 가치...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=794781
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 1652
+    - 기사 크롤링 성공 및 추가: 기후위기 시대, 대한민국 환경의 미래를 말하다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797043
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 32
+    - 본문 길이: 1100
+    - 기사 크롤링 성공 및 추가: 한국환경공단, 아세안 의장국 말레이시아에 ESG 성과 ...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=719248
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 17
+    - 본문 길이: 1062
+    - 기사 크롤링 성공 및 추가: 사막화 방지 국제 공동연구 협력...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796829
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 26
+    - 본문 길이: 1002
+    - 기사 크롤링 성공 및 추가: 한국농어촌공사, ‘관개 및 농업개발’ 연수 실시...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797212
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 951
+    - 기사 크롤링 성공 및 추가: 화성특례시의회, 2025 화성특례시 청소년 축제 참석...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796449
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 35
+    - 본문 길이: 4372
+    - 기사 크롤링 성공 및 추가: “기후위기 속 국민의 환경권 보장해야”··· 환경정책 ...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=771897
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 896
+    - 기사 크롤링 성공 및 추가: 산림청, 올해 송이버섯 9월 말부터 본격 생산 전망...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796674
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 19
+    - 본문 길이: 852
+    - 기사 크롤링 성공 및 추가: 작지만 소중한 숲, 사진으로 만난다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=794998
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 3014
+    - 기사 크롤링 성공 및 추가: 태양광 발전, 5년 내 원전보다 저렴해져...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=794813
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 16
+    - 본문 길이: 3047
+    - 기사 크롤링 성공 및 추가: “태양광 없이는 미래도 없다”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=701199
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 2828
+    - 기사 크롤링 성공 및 추가: COP27 이후가 문제··· CDM 사업 전환 안갯속...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=785081
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 33
+    - 본문 길이: 1418
+    - 기사 크롤링 성공 및 추가: 우원식 의장, 아세안 10개국 주한외교사절 초청 간담회...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796560
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 1013
+    - 기사 크롤링 성공 및 추가: 아시아물위원회, 유엔환경계획 공인기관 지정...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796446
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 15
+    - 본문 길이: 809
+    - 기사 크롤링 성공 및 추가: 김인중 농어촌공사 사장 취임...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797261
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 42
+    - 본문 길이: 1269
+    - 기사 크롤링 성공 및 추가: 이재명·권영국, ESG 7대 정책 전면 동의··· 국민...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=774862
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 17
+    - 본문 길이: 1366
+    - 기사 크롤링 성공 및 추가: 의료기관 내 환자 안전사고 급증...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=795003
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 3196
+    - 기사 크롤링 성공 및 추가: 15개국 기업 경영인 78%, 재생에너지 전환 지지...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=791221
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 31
+    - 본문 길이: 1380
+    - 기사 크롤링 성공 및 추가: 전국 동시다발 산불 발생··· 재난사태 선포로 진화 총...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797232
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 981
+    - 기사 크롤링 성공 및 추가: 제74회 여주시의회 제1차 정례회 개회...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=783215
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 16
+    - 본문 길이: 1388
+    - 기사 크롤링 성공 및 추가: “모든 담배는 건강에 해롭다”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797035
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 2956
+    - 기사 크롤링 성공 및 추가: 초대형 산불, 진화 이후가 더 위험하다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796575
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 32
+    - 본문 길이: 1190
+    - 기사 크롤링 성공 및 추가: 오사카엑스포 ‘한국의 날’, K-푸드로 일본 현지 사로...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797234
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 27
+    - 본문 길이: 747
+    - 기사 크롤링 성공 및 추가: 광명시, 지역기업과 손잡고 공정무역 브랜드 키운다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796561
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 18
+    - 본문 길이: 1647
+    - 기사 크롤링 성공 및 추가: 환경부, ‘동물대체시험시설’ 착공...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=791460
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 827
+    - 기사 크롤링 성공 및 추가: 식약처-지자체, '의약품 불법유통 점검' 실시...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797208
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 717
+    - 기사 크롤링 성공 및 추가: 광명시의회, 인구문제 인식개선 ‘앞장’...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797219
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 39
+    - 본문 길이: 880
+    - 기사 크롤링 성공 및 추가: 오산시, ‘2025년 여성 1인 가구 안심패키지 지원사...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796867
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 31
+    - 본문 길이: 4199
+    - 기사 크롤링 성공 및 추가: 금정산 국립공원 지정 코앞, 무허가 불법행위는 수십 년...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796701
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 731
+    - 기사 크롤링 성공 및 추가: 해양환경공단, 민간과 함께 수중정화활동 실시...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796572
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 2018
+    - 기사 크롤링 성공 및 추가: “플라스틱 오염 해결, 생산 감축은 필수”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=775601
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 1357
+    - 기사 크롤링 성공 및 추가: 소득 수준 낮을수록 암환자 생존율도 낮아...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797213
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 27
+    - 본문 길이: 654
+    - 기사 크롤링 성공 및 추가: 청송군, 산불 피해 주민 위한 힐링 프로젝트 실시...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=794954
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 1838
+    - 기사 크롤링 성공 및 추가: 기후변화 해결 위해 모인 ‘바다 위 기후 혁신가들’...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=784298
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1201
+    - 기사 크롤링 성공 및 추가: 김윤 의원, ‘전공의 수련 혁신법’ 대표발의...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=787356
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 30
+    - 본문 길이: 3456
+    - 기사 크롤링 성공 및 추가: 서울시 투수블록 제도, 허술한 관리로 '무용지물' 우려...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797157
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 1987
+    - 기사 크롤링 성공 및 추가: “기후위기 외면하는 대선 정치 사라져야”...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797221
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 2717
+    - 기사 크롤링 성공 및 추가: 화성특례시, 2년 연속 출생아 수 ‘전국 1위’ 달성...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=792771
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 19
+    - 본문 길이: 399
+    - 기사 크롤링 성공 및 추가: 동서발전 호남화력본부 대형화재 발생...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=694701
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 27
+    - 본문 길이: 2542
+    - 기사 크롤링 성공 및 추가: 메콩강 상생 협력 촉구···국경 없이 정보 나눠야...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797158
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 32
+    - 본문 길이: 951
+    - 기사 크롤링 성공 및 추가: 구상나무, 묘목 생존율 96%··· 산림 복원 가능성 ...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796582
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 1127
+    - 기사 크롤링 성공 및 추가: 농식품부, 최대 40% 농산물 할인 지원...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=773710
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 1085
+    - 기사 크롤링 성공 및 추가: ‘게보린’ 공항에선 가격 ‘2배’ 비싸...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=793299
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 2095
+    - 기사 크롤링 성공 및 추가: 폭염 시대의 보건관리, 현장의 해답을 찾다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796573
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 1897
+    - 기사 크롤링 성공 및 추가: 당진 LNG 터미널 확장 재검토 촉구...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797238
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 19
+    - 본문 길이: 1363
+    - 기사 크롤링 성공 및 추가: 환경부, 2025 녹색소비주간 개막...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796871
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 2045
+    - 기사 크롤링 성공 및 추가: 수종 다양성 높은 숲, 산불 천연 방패막 역할 확인...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=785980
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1456
+    - 기사 크롤링 성공 및 추가: 민·관 원팀으로 ‘국가 바이오 위원회’ 출범...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=791549
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 1741
+    - 기사 크롤링 성공 및 추가: 의성 산불 확산, 경북 북부권 사망자 속출...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796672
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 821
+    - 기사 크롤링 성공 및 추가: 산림청, 산불피해지 위험목 제거사업 추진...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797033
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 1571
+    - 기사 크롤링 성공 및 추가: 10년간 유입주의 생물 지정 15배 확대...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=783601
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 783
+    - 기사 크롤링 성공 및 추가: 181명 태운 제주항공 여객기 착륙 중 충돌...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797211
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 27
+    - 본문 길이: 1169
+    - 기사 크롤링 성공 및 추가: 주민이 주도하는 안동시 ‘일상회복지원위원회’ 발족...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797242
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 18
+    - 본문 길이: 923
+    - 기사 크롤링 성공 및 추가: 2025년 제10회 생태문학 공모...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797134
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 1051
+    - 기사 크롤링 성공 및 추가: 한국형 선진 기상기술, 개도국에 전수...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796279
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 3493
+    - 기사 크롤링 성공 및 추가: 사용후 배터리, 순환이용 산업 집중 육성...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=771850
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1336
+    - 기사 크롤링 성공 및 추가: 고령~성주간 도로 건설현장, 환경·안전 논란...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797126
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 1468
+    - 기사 크롤링 성공 및 추가: 올여름, 평년보다 더 덥고 초여름엔 비도 많다...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=783387
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 17
+    - 본문 길이: 1094
+    - 기사 크롤링 성공 및 추가: 해수부, 청년바다마을 설계 공모...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=795317
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 2024
+    - 기사 크롤링 성공 및 추가: GGGI, 2025 아워 오션 컨퍼런스 참가...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=790573
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 18
+    - 본문 길이: 1373
+    - 기사 크롤링 성공 및 추가: 수산 부산물로 바이오의약품 상용화...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=793477
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 3174
+    - 기사 크롤링 성공 및 추가: 욕망산 제거 공사 현장, 비산먼지 우려...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797230
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 999
+    - 기사 크롤링 성공 및 추가: 안양시, 국가재난관리 유공 대통령 표창 받아...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=708571
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 24
+    - 본문 길이: 1627
+    - 기사 크롤링 성공 및 추가: 산림청, UNCCD ‘파트너십 어워드’ 수상...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797010
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 962
+    - 기사 크롤링 성공 및 추가: 농식품부, 스마트축산 청년 서포터즈 확대...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=779647
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 1232
+    - 기사 크롤링 성공 및 추가: 재단법인 피플, 우즈벡 카라칼팍스탄과 민간 협력 논의...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796794
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 19
+    - 본문 길이: 1203
+    - 기사 크롤링 성공 및 추가: 기상청, 몽골과 기상기술 협력 강화...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797206
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 753
+    - 기사 크롤링 성공 및 추가: 칠곡군, 생물다양성 보존 위한 대규모 환경정화 활동...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797204
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 34
+    - 본문 길이: 1139
+    - 기사 크롤링 성공 및 추가: 제3회 의왕Youth Festa “오아시스(Oasis)...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=794106
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 1667
+    - 기사 크롤링 성공 및 추가: 속 빈 강정에 불과한 반려동물 영양제...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=795863
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 31
+    - 본문 길이: 811
+    - 기사 크롤링 성공 및 추가: 기후위기대응위원회, 건물부문 탄소중립 실현 정책협약 체...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=731302
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 25
+    - 본문 길이: 1628
+    - 기사 크롤링 성공 및 추가: 팔레스타인-이스라엘 아동 끔찍한 폭력사태 직면...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=774800
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 21
+    - 본문 길이: 1543
+    - 기사 크롤링 성공 및 추가: 고령인구 증가, 요양병원은 거꾸로 감소...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796856
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 23
+    - 본문 길이: 822
+    - 기사 크롤링 성공 및 추가: 외래침입종 관리, 생물다양성 보존의 첫걸음...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796563
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 22
+    - 본문 길이: 3694
+    - 기사 크롤링 성공 및 추가: 기후위기 시대 물재해 대응 국제협력 강화...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=786094
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 26
+    - 본문 길이: 660
+    - 기사 크롤링 성공 및 추가: 쓰레기 투기, 길거리 흡연에 몸살 앓는 ‘해남’...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797214
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 27
+    - 본문 길이: 1066
+    - 기사 크롤링 성공 및 추가: 경북교육청, 집중호우·태풍에도 안전한 학교 만들기...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796265
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 35
+    - 본문 길이: 782
+    - 기사 크롤링 성공 및 추가: 농어촌공사, 제12대 신임 사장에 김인중 전 농식품부 ...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=792839
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 26
+    - 본문 길이: 4596
+    - 기사 크롤링 성공 및 추가: 허울뿐인 순환골재 의무사용, 위반해도 처벌 전무...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796289
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 16
+    - 본문 길이: 3609
+    - 기사 크롤링 성공 및 추가: 환경부, 여름철 홍수대책 발표...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=765157
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 29
+    - 본문 길이: 3041
+    - 기사 크롤링 성공 및 추가: GCF, 개발도상국 10억 달러 규모 기후 재원 승인...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=791099
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 31
+    - 본문 길이: 2829
+    - 기사 크롤링 성공 및 추가: 경남 양산 산업단지 토석 불법 반출··· 당국은 수수방...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=797244
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 34
+    - 본문 길이: 725
+    - 기사 크롤링 성공 및 추가: 안양시, 개발사업 시행·승인 공무원 환경영향평가 직무교...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=796584
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 28
+    - 본문 길이: 1223
+    - 기사 크롤링 성공 및 추가: 농식품부, 21개 시·군과 ‘살기 좋은 농촌’ 조성...
+  기사 페이지 시도: https://www.hkbs.co.kr/news/articleView.html?idxno=792125
+    - 제목 요소 찾음: True
+    - 본문 요소 찾음: True
+    - 제목 길이: 20
+    - 본문 길이: 1245
+    - 기사 크롤링 성공 및 추가: 사상 최대 피해 남긴 경북 산불 진화...
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+  - 키워드 매칭 성공: 재활용 -> 카테고리: 업사이클
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+  - 키워드 매칭 성공: 온실가스 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+  - 키워드 매칭 성공: 전기차 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+  - 키워드 매칭 성공: 미세먼지 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 대중교통 -> 카테고리: 에너지절약
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 플로깅 -> 카테고리: 플로깅
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+  - 키워드 매칭 성공: 재활용 -> 카테고리: 업사이클
+기존 키워드 매칭 성공: 플라스틱 -> 카테고리: 제로웨이스트
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 온실가스 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+기존 키워드 매칭 성공: 에너지 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 온실가스 -> 카테고리: 에너지절약
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+기존 키워드 매칭 성공: 플라스틱 -> 카테고리: 제로웨이스트
+기존 키워드 매칭 성공: 에너지 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 텀블러 -> 카테고리: 제로웨이스트
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+  - 키워드 매칭 성공: 장바구니 -> 카테고리: 제로웨이스트
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+기존 키워드 매칭 성공: 플라스틱 -> 카테고리: 제로웨이스트
+기존 키워드 매칭 성공: 에너지 -> 카테고리: 에너지절약
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 재활용 -> 카테고리: 업사이클
+기존 키워드 매칭 성공: 플라스틱 -> 카테고리: 제로웨이스트
+  - 키워드 매칭 성공: 폐기물 -> 카테고리: 제로웨이스트
+  - 키워드 매칭 성공: 미세먼지 -> 카테고리: 에너지절약
+기존 키워드 매칭 성공: 에너지 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 플로깅 -> 카테고리: 플로깅
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+  - 키워드 매칭 성공: 재활용 -> 카테고리: 업사이클
+기존 키워드 매칭 성공: 디지털 -> 카테고리: 디지털탄소
+  - 키워드 매칭 성공: 탄소중립 -> 카테고리: 에너지절약
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+기존 키워드 매칭 성공: 문화 -> 카테고리: 문화공유
+크롤링 기반 챌린지 (환경일보 뉴스만) 63개 생성 완료
+랜덤 모드: 100개 문단 저장 완료
