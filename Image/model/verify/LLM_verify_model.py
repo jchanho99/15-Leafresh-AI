@@ -2,10 +2,12 @@ from vertexai import init
 from vertexai.preview.generative_models import GenerativeModel
 from dotenv import load_dotenv
 import os
+import requests
+# import replicate
 
 # 이미지 리사이징 
 from PIL import Image as PILImage
-from vertexai.preview.generative_models import Image as VertexImage
+from vertexai.preview.generative_models import Image as VertexImage   # vertexAI에서만 사용 
 
 # GCP Cloud Storage 연결
 from google.cloud import storage  
@@ -43,11 +45,10 @@ class ImageVerifyModel :
                         pillow_image = pillow_image.resize((new_width, new_height))
                     pillow_image.save(temp_file.name, format="PNG")
 
-                # VertexAI용 이미지 객체 로드
-                image = VertexImage.load_from_file(temp_file.name)
-                # image = Image.load_from_file(temp_file.name)
+                # VertexAI용 이미지 객체 로드 
+                # image = VertexImage.load_from_file(temp_file.name)
 
-            return self.response(image, challenge_type, challenge_id, challenge_name, challenge_info)
+            return self.response(pillow_image, challenge_type, challenge_id, challenge_name, challenge_info)
 
         except Exception as e:
             return f"[에러] GCS 이미지 로드 실패: {e}" 
@@ -85,7 +86,9 @@ class ImageVerifyModel :
                 "너무 이미지가 흐리거나 블러 처리 되어있는 경우 무조건 '아니오'를 출력해주세요. \n"
                 "적합한 이미지인지 예/아니오로 대답해주세요. 결과는 무조건 예/아니오 로만 대답해주세요. \n"
             )
-            
+
+        ''' 
+        # vertex AI API 사용   
         result = self.model.generate_content(
             [prompt, image],
             generation_config={
@@ -97,4 +100,43 @@ class ImageVerifyModel :
         )
 
         return result.text
+        '''
+
+        # LLaVA-13B 자체 서빙 모델
+        # PIL.Image를 tempfile로 저장한 후 POST 요청
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as temp_img_file:
+            image.save(temp_img_file.name)
+
+            with open(temp_img_file.name, 'rb') as f:
+                files = {'image': f}
+                data = {'prompt': prompt}
+                try:
+                    response = requests.post("http://35.216.16.225:8000/verify-llava", files=files, data=data)
+                    result = response.json().get("result", "응답 없음")
+                except Exception as e:
+                    result = f"[에러] LLaVA 요청 실패: {e}"
+
+        return result
     
+        
+        # LLaVA-13B replicate API 사용 
+        # try:
+        #     load_dotenv()
+        #     os.environ["REPLICATE_API_TOKEN"] = os.getenv("REPLICATE_API_TOKEN")
+
+        #     result = replicate.run(
+        #         "yorickvp/llava-v1.6-mistral-7b",
+        #         input={
+        #            "image": image_url,
+        #             "prompt": prompt,
+        #             "max_tokens": 512,
+        #             "temperature": 0.2,
+        #             "top_p": 1
+        #         }
+        #     )
+        # except Exception as e:
+        #     result = f"[에러] Replicate API 호출 실패: {e}"
+
+        # return result
+        
+
