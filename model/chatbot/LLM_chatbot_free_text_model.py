@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langgraph.graph import StateGraph, END
 from typing import TypedDict, Annotated, Sequence, Optional, Dict, List
-from Text.LLM.model.chatbot.chatbot_constants import label_mapping, ENV_KEYWORDS, BAD_WORDS
+from model.chatbot.chatbot_constants import label_mapping, ENV_KEYWORDS, BAD_WORDS
 import os
 import json
 import random

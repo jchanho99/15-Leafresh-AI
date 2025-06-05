@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from typing import List, Dict, Any
 
 # Adjust the import based on your actual file structure
-from ..model.feedback.LLM_feedback_model import FeedbackModel
+from model.feedback.LLM_feedback_model import FeedbackModel
 
 import httpx # httpx 라이브러리 임포트
 import os # 환경 변수 로드를 위해 os 임포트

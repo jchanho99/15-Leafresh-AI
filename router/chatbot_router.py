@@ -1,7 +1,7 @@
 # chatbot_router.py
-from ..model.chatbot.LLM_chatbot_base_info_model import base_prompt, get_llm_response
-from ..model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever, process_chat, clear_conversation, conversation_states
-from ..model.chatbot.chatbot_constants import label_mapping, ENV_KEYWORDS, BAD_WORDS
+from model.chatbot.LLM_chatbot_base_info_model import base_prompt, get_llm_response
+from model.chatbot.LLM_chatbot_free_text_model import qa_chain, retriever, process_chat, clear_conversation, conversation_states
+from model.chatbot.chatbot_constants import label_mapping, ENV_KEYWORDS, BAD_WORDS
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
