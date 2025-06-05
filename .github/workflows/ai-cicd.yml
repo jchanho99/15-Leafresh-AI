@@ -3,10 +3,9 @@ name: AI Project CI/CD
 on:
   push:
     tags:
-      - 'v[0-9]*.[0-9]*.[0-9]*-kellyn-dev'
-      - 'v[0-9]*.[0-9]*.[0-9]*-kellyn-prod'
-      - 'v[0-9]*.[0-9]*.[0-9]*-mac-dev'
-      - 'v[0-9]*.[0-9]*.[0-9]*-mac-prod'
+      - 'v*-kellyn-dev'
+      - 'v*-mac-dev'
+      - 'v1.*'
   pull_request:
     branches:
       - develop
@@ -21,8 +20,6 @@ on:
         options:
           - kellyn-dev
           - mac-dev
-          - kellyn-prod
-          - mac-prod
 
 jobs:
   unit-test:
