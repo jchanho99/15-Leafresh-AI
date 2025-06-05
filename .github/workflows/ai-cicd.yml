@@ -148,27 +148,29 @@ jobs:
       - name: Set Status (Failure)
         if: failure()
         run: echo "status=failure" >> "$GITHUB_OUTPUT"
+notify:
+  name: Discord Notification
+  needs: [deploy]
+  if: |
+    always() &&
+    needs.deploy.result != 'skipped'
+  runs-on: ubuntu-latest
+  steps:
+    - name: Send Discord Message
+      run: |
+        STATUS="${{ needs.deploy.outputs.status }}"
+        TAG="${GITHUB_REF#refs/tags/}"
 
-  notify:
-    name: Discord Notification
-    needs: [deploy]
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Send Discord Message
-        run: |
-          STATUS="${{ needs.deploy.outputs.status }}"
-          TAG="${GITHUB_REF#refs/tags/}"
+        if [[ "$STATUS" == "success" ]]; then
+          MESSAGE="✅ [${TAG}] 배포 완료"
+        elif [[ "$STATUS" == "failure" ]]; then
+          MESSAGE="🚨 [${TAG}] 배포 실패"
+        else
+          MESSAGE="⚠️ [${TAG}] 배포 상태를 알 수 없습니다."
+        fi
 
-          if [[ "$STATUS" == "success" ]]; then
-            MESSAGE="✅ [${TAG}] 배포 완료"
-          elif [[ "$STATUS" == "failure" ]]; then
-            MESSAGE="🚨 [${TAG}] 배포 실패"
-          else
-            MESSAGE="⚠️ [${TAG}] 배포 상태를 알 수 없습니다."
-          fi
+        curl -H "Content-Type: application/json" \
+             -X POST \
+             -d "{\"content\": \"$MESSAGE\"}" \
+             ${{ secrets.DISCORD_WEBHOOK_URL }}
 
-          curl -H "Content-Type: application/json" \
-               -X POST \
-               -d "{\"content\": \"$MESSAGE\"}" \
-               ${{ secrets.DISCORD_WEBHOOK_URL }}
