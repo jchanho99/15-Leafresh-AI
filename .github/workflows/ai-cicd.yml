@@ -18,12 +18,13 @@ on:
         required: true
         type: choice
         options:
-          - kellyn
-          - mac
+          - kellyn-dev
+          - mac-dev
+          - api-prod
 
 jobs:
-  unit-test:
-    name: Unit Test
+  unit-and-integration-test-model:
+    name: Unit Test & Integration Test - 자체 모델
     if: github.event_name == 'workflow_dispatch' && contains(github.event.inputs.target_test, '-dev')
     runs-on: ubuntu-latest
     defaults:
@@ -40,7 +41,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Get env files 
+      - name: Get env files & Google Credentials
         run: |
           set -a
           echo "$ENV_DEV" > .env
@@ -52,13 +53,11 @@ jobs:
               echo "$line" >> $GITHUB_ENV
             fi
           done < .env
-      
-      - name: Get Google Credentials Key with original filename
-        run: |
+
           filename=$(grep "^GOOGLE_APPLICATION_CREDENTIALS=" .env | cut -d '=' -f2)
           echo "$GOOGLE_CREDENTIAL_JSON_BASE64" | base64 -d > "$filename"
           jq . "$filename" > /dev/null
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/$filename" >> $GITHUB_ENVV
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/$filename" >> $GITHUB_ENV
       
       - name: Install Dependencies
         run: pip install -r requirements.txt
@@ -70,47 +69,6 @@ jobs:
           else
             python verify_unit_test.py
           fi
-
-  integration-test:
-    name: Integration Test
-    if: github.event_name == 'workflow_dispatch' && contains(github.event.inputs.target_test, '-prod')
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ contains(github.event.inputs.target_test, 'mac') && './Text/LLM' || './Image' }}
-    env:
-      GOOGLE_CREDENTIAL_JSON_BASE64: ${{ secrets.GCP_SA_KEY_DEV_BASE64 }}
-      ENV_DEV: ${{ secrets.ENV_AI_DEV }}
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.12"
-
-      - name: Get env files 
-        run: |
-          set -a
-          echo "$ENV_DEV" > .env
-          source .env
-          set +a
-
-          while IFS= read -r line; do
-            if [[ "$line" == *=* && "$line" != \#* ]]; then
-              echo "$line" >> $GITHUB_ENV
-            fi
-          done < .env
-      
-      - name: Get Google Credentials Key with original filename
-        run: |
-          filename=$(grep "^GOOGLE_APPLICATION_CREDENTIALS=" .env | cut -d '=' -f2)
-          echo "$GOOGLE_CREDENTIAL_JSON_BASE64" | base64 -d > "$filename"
-          jq . "$filename" > /dev/null
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$PWD/$filename" >> $GITHUB_ENVV
-      
-      - name: Install Dependencies
-        run: pip install -r requirements.txt
       
       - name: Run Integration Test
         run: |
@@ -128,9 +86,63 @@ jobs:
       - name: Terminate uvicorn
         run: pkill -f "uvicorn"
 
-  deploy:
-    name: Deploy AI
-    if: startsWith(github.ref, 'refs/tags/v')
+  unit-and-integration-test-api:
+    name: Unit Test & Integration Test - API
+    if: github.event_name == 'workflow_dispatch' && contains(github.event.inputs.target_test, '-dev')
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_CREDENTIAL_JSON_BASE64: ${{ secrets.GCP_SA_KEY_DEV_BASE64 }}
+      ENV_DEV: ${{ secrets.ENV_AI_DEV }}
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Get env files & Google Credentials
+        run: |
+          set -a
+          echo "$ENV_DEV" > .env
+
+          while IFS= read -r line; do
+            if [[ "$line" == *=* && "$line" != \#* ]]; then
+              echo "$line" >> $GITHUB_ENV
+            fi
+          done < .env
+
+          filename=$(grep "^GOOGLE_APPLICATION_CREDENTIALS=" .env | cut -d '=' -f2)
+          echo "$GOOGLE_CREDENTIAL_JSON_BASE64" | base64 -d > "$filename"
+          jq . "$filename" > /dev/null
+          set +a
+          
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+      
+      - name: Run Unit Test
+        run: |
+          python censorship_unit_test.py
+          sleep 3
+          python verify_unit_test.py
+      
+      - name: Run Integration Test
+        run: |
+          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload --env-file .env > uvicorn.log 2>&1 &
+          sleep 30
+          chmod +x censorship_curl_test.sh && ./censorship_curl_test.sh
+          sleep 3
+          chmod +x verify_curl_test.sh && ./verify_curl_test.sh
+
+      - name: Print Log 
+        run: cat uvicorn.log
+
+      - name: Terminate uvicorn
+        run: pkill -f "uvicorn"
+
+  deploy-model:
+    name: Deploy - 자체 모델
+    if: startsWith(github.ref, 'refs/tags/v') && (contains(github.ref, 'kellyn') || contains(github.ref, 'mac'))
     runs-on: ubuntu-latest
     steps:
       - name: Extract service context
@@ -142,18 +154,10 @@ jobs:
             echo "dir=Image" >> $GITHUB_OUTPUT
             echo "host=${{ secrets.SSH_HOST_DEV_KELLYN }}" >> $GITHUB_OUTPUT
             echo "env=ENV_AI_DEV" >> $GITHUB_OUTPUT
-          elif [[ "$REF" == *"kellyn-prod" ]]; then
-            echo "dir=Image" >> $GITHUB_OUTPUT
-            echo "host=${{ secrets.SSH_HOST_PROD_KELLYN }}" >> $GITHUB_OUTPUT
-            echo "env=ENV_AI_PROD" >> $GITHUB_OUTPUT
           elif [[ "$REF" == *"mac-dev" ]]; then
             echo "dir=Text/LLM" >> $GITHUB_OUTPUT
             echo "host=${{ secrets.SSH_HOST_DEV_MAC }}" >> $GITHUB_OUTPUT
             echo "env=ENV_AI_DEV" >> $GITHUB_OUTPUT
-          elif [[ "$REF" == *"mac-prod" ]]; then
-            echo "dir=Text/LLM" >> $GITHUB_OUTPUT
-            echo "host=${{ secrets.SSH_HOST_PROD_MAC }}" >> $GITHUB_OUTPUT
-            echo "env=ENV_AI_PROD" >> $GITHUB_OUTPUT
           else
             echo "Unknown tag" && exit 1
           fi
@@ -166,11 +170,60 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            set -e
             git clone https://github.com/100-hours-a-week/15-Leafresh-AI.git
             cd 15-Leafresh-AI/${{ steps.info.outputs.dir }}
             pip install -r requirements.txt
+            
             echo "${{ secrets[steps.info.outputs.env] }}" > .env
+            filename=$(grep "^GOOGLE_APPLICATION_CREDENTIALS=" .env | cut -d '=' -f2)
+            echo "${{ secrets.GOOGLE_CREDENTIAL_JSON_BASE64 }}" | base64 -d > "$filename"
+            jq . "$filename" > /dev/null
+            
+            nohup uvicorn main:app --host 0.0.0.0 --port 8000 --env-file .env > uvicorn.log 2>&1 &
+
+      - name: Set Status
+        id: set-status
+        if: success()
+        run: echo "status=success" >> "$GITHUB_OUTPUT"
+
+      - name: Set Status (Failure)
+        if: failure()
+        run: echo "status=failure" >> "$GITHUB_OUTPUT"
+
+  deploy-api:
+    name: Deploy - API
+    if: startsWith(github.ref, 'refs/tags/v1')
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_CREDENTIAL_JSON_BASE64: ${{ secrets.GCP_SA_KEY_DEV_BASE64 }}
+      ENV_DEV: ${{ secrets.ENV_AI_DEV }}
+    steps:
+      - name: SSH 배포
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST_PROD }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            git clone https://github.com/100-hours-a-week/15-Leafresh-AI.git
+            cd 15-Leafresh-AI/
+            pip install -r requirements.txt
+            
+            set -a
+            echo "$ENV_DEV" > .env
+            
+            while IFS= read -r line; do
+              if [[ "$line" == *=* && "$line" != \#* ]]; then
+                echo "$line" >> $GITHUB_ENV
+              fi
+            done < .env
+            
+            filename=$(grep "^GOOGLE_APPLICATION_CREDENTIALS=" .env | cut -d '=' -f2)
+            echo "$GOOGLE_CREDENTIAL_JSON_BASE64" | base64 -d > "$filename"
+            jq . "$filename" > /dev/null
+            set +a  
+            
             nohup uvicorn main:app --host 0.0.0.0 --port 8000 --env-file .env > uvicorn.log 2>&1 &
 
       - name: Set Status
@@ -184,16 +237,23 @@ jobs:
   
   notify:
     name: Discord Notification
-    needs: [deploy]
+    needs: [deploy-model, deploy-api]
     if: |
       always() &&
-      needs.deploy.result != 'skipped'
+      (needs.deploy-model.result != 'skipped' || needs.deploy-api.result != 'skipped')
     runs-on: ubuntu-latest
     steps:
-      - name: Send Discord Message
+      - name: Determine Status and Message
+        id: notify-message
         run: |
-          STATUS="${{ needs.deploy.outputs.status }}"
           TAG="${GITHUB_REF#refs/tags/}"
+          if [[ "${{ needs.deploy-model.result }}" != 'skipped' ]]; then
+            STATUS="${{ needs.deploy-model.outputs.status }}"
+          elif [[ "${{ needs.deploy-api.result }}" != 'skipped' ]]; then
+            STATUS="${{ needs.deploy-api.outputs.status }}"
+          else
+            STATUS="unknown"
+          fi
 
           if [[ "$STATUS" == "success" ]]; then
             MESSAGE="✅ [${TAG}] 배포 완료"
@@ -203,7 +263,12 @@ jobs:
             MESSAGE="⚠️ [${TAG}] 배포 상태를 알 수 없습니다."
           fi
 
+          echo "message=$MESSAGE" >> $GITHUB_OUTPUT
+
+      - name: Send Discord Message
+        run: |
           curl -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"content\": \"$MESSAGE\"}" \
+               -d "{\"content\": \"${{ steps.notify-message.outputs.message }}\"}" \
                ${{ secrets.DISCORD_WEBHOOK_URL }}
+
