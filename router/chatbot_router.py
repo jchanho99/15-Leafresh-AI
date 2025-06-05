@@ -18,10 +18,7 @@ class CategoryRequest(BaseModel):
     workType: Optional[str] = None
     category: Optional[str] = None
 class FreeTextRequest(BaseModel):
-<<<<<<< HEAD
-=======
     sessionId: Optional[str] = None
->>>>>>> origin/main
     message: Optional[str] = None
 
 # 비-RAG 방식 챌린지 추천
